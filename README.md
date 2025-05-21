@@ -101,11 +101,11 @@ _Tavoite: Työkalut ja perussuunnitelma valmiina kehityksen aloittamiseen._
 - [Tehty] **Teknologiavalinnat:** Vahvistettu (Next.js, TypeScript, Tailwind CSS).
 - [x] **Kehitysympäristö:**
   - [Tehty] VS Code asennettu ja peruslisäosat (Prettier, ESLint, GitLens).
-  - [x] GitHub-repositorio luotu (`main` ja `dev` haarat).
-  - `main` luotu, lokaali ja GiHub-repositorio linkitetty. Seuraavaksi `dev` luonti.
+  - [Tehty] GitHub-repositorio luotu (`main` ja `dev` haarat).
+  - `main` luotu, lokaali ja GiHub-repositorio linkitetty. Seuraavaksi `dev`. Nyt myös `dev` luotu.
   - [x] Next.js-projekti alustettu TypeScriptillä.
-  - [x] Paikallinen projekti yhdistetty GitHubiin.
-- [x] **README.md:** Tämä README-tiedosto luotu ja päivitetty.
+  - [Tehty] Paikallinen projekti yhdistetty GitHubiin.
+- [Tehty] **README.md:** Tämä README-tiedosto luotu ja päivitetty.
 
 ---
 
