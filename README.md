@@ -99,13 +99,31 @@ _Tavoite: Työkalut ja perussuunnitelma valmiina kehityksen aloittamiseen._
 - [x] **Visuaalinen hahmotelma:** Yksinkertaiset rautalankamallit/mockupit keskeisistä sivuista luotu (esim. paperille tai Figmalla).
   - _Miten tehty:_ [Lyhyt kuvaus tai linkki kuviin, jos tallessa digitaalisesti]
 - [Tehty] **Teknologiavalinnat:** Vahvistettu (Next.js, TypeScript, Tailwind CSS).
-- [x] **Kehitysympäristö:**
+- [Tehty] **Kehitysympäristö:**
+
   - [Tehty] VS Code asennettu ja peruslisäosat (Prettier, ESLint, GitLens).
   - [Tehty] GitHub-repositorio luotu (`main` ja `dev` haarat).
   - `main` luotu, lokaali ja GiHub-repositorio linkitetty. Seuraavaksi `dev`. Nyt myös `dev` luotu.
-  - [x] Next.js-projekti alustettu TypeScriptillä.
+  - [Tehty] Next.js-projekti alustettu TypeScriptillä.
+
+    - Node.js ja riippuvuudet ladattu projektiin
+      Installing dependencies:
+
+      - react
+      - react-dom
+      - next
+
+      Installing devDependencies:
+
+      - typescript
+      - @types/node
+      - @types/react
+      - @types/react-dom
+      - @tailwindcss/postcss
+      - tailwindcss
+
   - [Tehty] Paikallinen projekti yhdistetty GitHubiin.
-- [Tehty] **README.md:** Tämä README-tiedosto luotu ja päivitetty.
+  - [Tehty] **README.md:** Tämä README-tiedosto luotu ja päivitetty.
 
 ---
 
