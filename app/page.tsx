@@ -13,7 +13,7 @@ export default function Home() {
             Käytän tässä placeholder-kuvaa.
         */}
         <Image
-          src="https://placehold.co/1920x1080/5a3a2b/ffffff?text=Palju+Tunnelmaa"
+          src="public/IMG_20201104_150509__01.jpg"
           alt="Tunnelmallinen kuva paljusta"
           layout="fill"
           objectFit="cover"
