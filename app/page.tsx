@@ -7,18 +7,15 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative flex items-center justify-center h-screen">
         {/* Taustakuva */}
-        {/* VAIHDA TÄHÄN OMA TAUSTAKUVASI!
-            Laita kuva public-kansioon (esim. /palju-background.jpg)
-            ja muuta src-attribuutti vastaavasti.
-            Käytän tässä placeholder-kuvaa.
-        */}
+        {/* Kuva ladataan nyt public-kansiosta. */}
         <Image
-          src="public/IMG_20201104_150509__01.jpg"
+          src="/IMG_20201104_150509__01.jpg" // KORJATTU POLKU
           alt="Tunnelmallinen kuva paljusta"
           layout="fill"
           objectFit="cover"
           quality={85}
           className="-z-10" // Asettaa kuvan taustalle
+          priority // Lataa kuvan heti, koska se on tärkeä osa sivua
         />
         {/* Tumma peittokuva tekstin luettavuuden parantamiseksi */}
         <div className="absolute inset-0 bg-black opacity-40 -z-10"></div>
