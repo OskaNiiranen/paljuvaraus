@@ -135,7 +135,7 @@ _Tavoite: Näkyvä sivuston runko, jossa on perusinformaatio ja navigointi._
   - [ ] `Layout.tsx` (sis. Navigaatio, Footer-komponentit).
     - _Muistiinpanot/Miten tehty:_
   - [ ] Sivukomponentit (`app/page.tsx`, `app/paljut/page.tsx`, `app/paljut/[id]/page.tsx`, `app/yhteystiedot/page.tsx`).
-    - _Muistiinpanot/Miten tehty:_
+    - page.tsx hero asettelua etusivulle.
 - [ ] **Navigaatio & Footer:** Toteutettu ja lisätty layoutiin.
   - _Muistiinpanot/Miten tehty:_
 - [ ] **Sisältö - Paljut:**
@@ -188,7 +188,7 @@ _Tavoite: Asiakas voi nähdä saatavuuden ja lähettää varauspyynnön._
 
 ---
 
-### Vaihe 4: Viimeistely, Testaus ja Käyttöönoton Valmistelu (MVP1)
+### Vaihe 4: Viimeistely, Testaus ja Käyttöönoton Valmistelu
 
 _Tavoite: Hiottu, testattu ja julkaisuvalmis perusversio._
 
@@ -205,7 +205,7 @@ _Tavoite: Hiottu, testattu ja julkaisuvalmis perusversio._
 
 ---
 
-### Vaihe 5: Jatkokehitys (MVP 2 ja eteenpäin)
+### Vaihe 5: Jatkokehitys
 
 _Tavoite: Parannellaan ja lisätään uusia ominaisuuksia._
 
