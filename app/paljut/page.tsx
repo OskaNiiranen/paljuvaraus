@@ -1,8 +1,6 @@
-"use client"; // Lisätty, koska käytämme mahdollisesti client-puolen hookeja myöhemmin kalenterissa
-
 import Image from "next/image";
-import Link from "next/link";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
+import BookingCalendar from "@/components/BookingCalendar"; // Tuodaan uusi kalenterikomponentti
 
 // Data tälle yhdelle paljulle.
 const paljuData = {
@@ -22,10 +20,9 @@ const paljuData = {
     { period: "Koko viikko", price: "300€" },
     { period: "Juhlapyhät (Juhannus, joulu, uusi vuosi)", price: "alk. 300€" },
   ],
-  mainImageUrl: "/IMG_20201104_150509__01.jpg", // Tämän kuvan TÄYTYY olla public-kansiossa
+  mainImageUrl: "/IMG_20201104_150509__01.jpg", // Varmista, että tämä kuva on /public-kansiossa
   galleryImages: [
-    // KORJATTU: Käytetään toimivia placeholder-kuvia.
-    // Vaihda nämä omiin kuviisi, kun olet lisännyt ne public-kansioon.
+    // Varmista, että myös nämä kuvat ovat /public-kansiossa
     "/kylpytynnyri-karry-pahkina-lasiluukullinen-kamiina.png",
     "/44_1d9b8dc0-d162-4723-b03e-d7fefa5fbeaf.jpg",
     "/8DFCC0D9-9750-4238-A645-B452770ADBC9_1_201_a-scaled-1.jpeg",
@@ -43,7 +40,7 @@ export default function PaljuEsittelySivu() {
               <Image
                 src={paljuData.mainImageUrl}
                 alt="Pääkuva paljukärrystä"
-                fill // Korvaa layout="fill" ja objectFit="cover"
+                fill
                 className="object-cover"
                 priority
               />
@@ -65,7 +62,7 @@ export default function PaljuEsittelySivu() {
             </div>
           </div>
 
-          {/* Oikea palsta: Tiedot ja varaus */}
+          {/* Oikea palsta: Tiedot */}
           <div className="lg:col-span-2">
             <h1 className="text-4xl font-extrabold text-gray-900">
               {paljuData.name}
@@ -112,33 +109,12 @@ export default function PaljuEsittelySivu() {
           </div>
         </div>
 
-        {/* Varauskalenteri ja toimintakehote -osio */}
+        {/* === KORJATTU VARAUSKALENTERI-OSIO === */}
         <div className="mt-12 pt-8 border-t">
           <h2 className="text-3xl font-bold text-center mb-6">Tee varaus</h2>
-          <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-2xl">
-            <p className="text-center text-gray-600 mb-4">
-              1. Valitse haluamasi alkamis- ja päättymispäivä kalenterista.{" "}
-              <br />
-              2. Hinta päivittyy automaattisesti. <br />
-              3. Jatka täyttämään tietosi.
-            </p>
-            {/* TÄHÄN TULEE INTERAKTIIVINEN KALENTERIKOMPONENTTI */}
-            <div className="bg-gray-100 h-64 flex items-center justify-center rounded-lg mb-6">
-              <p className="text-gray-400">
-                Interaktiivinen kalenteri tulee tähän
-              </p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold mb-4">
-                Hinta yhteensä: <span className="text-blue-600">120€</span>
-              </p>
-              <Link
-                href="/kassa"
-                className="inline-block w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-lg px-12 py-4 transition-transform transform hover:scale-105 shadow-xl"
-              >
-                Jatka varaukseen
-              </Link>
-            </div>
+          <div className="max-w-2xl mx-auto">
+            {/* Tässä kohtaa käytetään uutta, toimivaa komponenttia */}
+            <BookingCalendar />
           </div>
         </div>
       </main>
