@@ -7,15 +7,14 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative flex items-center justify-center h-screen">
         {/* Taustakuva */}
-        {/* Kuva ladataan nyt public-kansiosta. */}
         <Image
-          src="/IMG_20201104_150509__01.jpg" // KORJATTU POLKU
+          src="/IMG_20201104_150509__01.jpg"
           alt="Tunnelmallinen kuva paljusta"
           layout="fill"
           objectFit="cover"
           quality={85}
-          className="-z-10" // Asettaa kuvan taustalle
-          priority // Lataa kuvan heti, koska se on tärkeä osa sivua
+          className="-z-10"
+          priority
         />
         {/* Tumma peittokuva tekstin luettavuuden parantamiseksi */}
         <div className="absolute inset-0 bg-black opacity-40 -z-10"></div>
@@ -29,11 +28,12 @@ export default function Home() {
             Helppo online-varaus, aina puhtaat ja laadukkaat paljut. Löydä
             täydellinen palju rentoutumiseen ja juhliin.
           </p>
+          {/* TÄMÄ ON MUUTETTU KOHTA */}
           <Link
-            href="/paljut" // Tämä linkki vie tulevaisuudessa paljujen selaussivulle
+            href="/paljut" // MUUTETTU: Ohjaa nyt suoraan paljun esittelysivulle
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-lg px-8 py-4 transition-transform transform hover:scale-105 shadow-xl"
           >
-            Selaa paljuja ja varaa
+            Katso palju ja varaa
           </Link>
         </div>
       </section>
