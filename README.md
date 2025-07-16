@@ -80,11 +80,11 @@ Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakk
 
 ## Kehityksen Edistyminen ja Tehtävälista
 
-**PÄIVITETTY: [21.05.2025]**
+**PÄIVITETTY: [16.07.2025]**
 
 **NYT TYÖN ALLA / SEURAAVAKSI:**
 
-- **[Vaihe 0: Projektinhallinta, repositorio ja branchit]**
+- **[Vaihe 1: Perussivusto ja Staattinen Sisältö]**
   - _[Tarkempi alitehtävä tai huomio]_
   - _[Toinen alitehtävä tai huomio]_
 
@@ -95,8 +95,6 @@ Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakk
 _Tavoite: Työkalut ja perussuunnitelma valmiina kehityksen aloittamiseen._
 
 - [Tehty] **Projektinhallinta:** Valittu työkalu (esim. tämä README ja GitHub Issues). Päätoiminnallisuudet listattu.
-  - _Miten tehty:_ Tämä README toimii keskeisenä seurantatyökaluna.
-- [x] **Visuaalinen hahmotelma:** Yksinkertaiset rautalankamallit/mockupit keskeisistä sivuista luotu (esim. paperille tai Figmalla).
   - _Miten tehty:_ [Lyhyt kuvaus tai linkki kuviin, jos tallessa digitaalisesti]
 - [Tehty] **Teknologiavalinnat:** Vahvistettu (Next.js, TypeScript, Tailwind CSS).
 - [Tehty] **Kehitysympäristö:**
@@ -131,28 +129,26 @@ _Tavoite: Työkalut ja perussuunnitelma valmiina kehityksen aloittamiseen._
 
 _Tavoite: Näkyvä sivuston runko, jossa on perusinformaatio ja navigointi._
 
-- [ ] **Sivupohjat (Layout & Peruskomponentit):**
-  - [ ] `Layout.tsx` (sis. Navigaatio, Footer-komponentit).
-    - _Muistiinpanot/Miten tehty:_
-  - [ ] Sivukomponentit (`app/page.tsx`, `app/paljut/page.tsx`, `app/paljut/[id]/page.tsx`, `app/yhteystiedot/page.tsx`).
-    - page.tsx hero asettelua etusivulle.
-- [ ] **Navigaatio & Footer:** Toteutettu ja lisätty layoutiin.
-  - _Muistiinpanot/Miten tehty:_
+- [Tehty] **Sivupohjat (Layout & Peruskomponentit):**
+  - [x] `Layout.tsx` (sis. Navigaatio, Footer-komponentit).
+    - Layout vielä työn alla.
+  - [x] Sivukomponentit (`app/page.tsx`, `app/paljut/page.tsx`, `app/paljut/[id]/page.tsx`, `app/yhteystiedot/page.tsx`).
+    - Hero, esittelysivu/varauskalenteri ja kassa-sivu tehty.
+- [x] **Navigaatio & Footer:** Toteutettu ja lisätty layoutiin.
+  - Sivurakenne on putki ja Footeriin tarvittavaa linkitystä
 - [ ] **Sisältö - Paljut:**
-  - [ ] `data/paljut.json` (tai vastaava) luotu sisältäen esimerkkidataa paljuista.
-    - _Muistiinpanot/Miten tehty:_
-  - [ ] "Paljut"-listaussivu (`/paljut`) näyttää paljut datasta.
-    - _Muistiinpanot/Miten tehty:_
-  - [ ] Yksittäisen paljun tietosivu (`/paljut/[id]`) näyttää valitun paljun tiedot.
-    - _Muistiinpanot/Miten tehty:_
-- [ ] **Sisältö - Muut sivut:** Perustekstit Etusivulle ja Yhteystiedot-sivulle.
-  - _Muistiinpanot/Miten tehty:_
-- [ ] **Perustyylittely:** Tailwind CSS konfiguroitu ja perusluokkia käytetty sivuston siistimiseen.
-  - _Muistiinpanot/Miten tehty:_
+  - [Tehty] "Paljut"-listaussivu (`/paljut`) näyttää paljut datasta.
+    - Varauskalenteri päätyi samalle sivulle
+  - [x] Yksittäisen paljun tietosivu (`/paljut/[id]`) näyttää valitun paljun tiedot.
+    - Vain yksi paljukärry, joten mennään yhdellä paljulla nyt.
+- [Tehty] **Sisältö - Muut sivut:** Perustekstit Etusivulle ja Yhteystiedot-sivulle.
+  - Perustekstit ja rautalankamalli tehty.
+- [x] **Perustyylittely:** Tailwind CSS konfiguroitu ja perusluokkia käytetty sivuston siistimiseen.
+  - Tailwind on konfiguroitu, mutta visuaalinen ilme tulee vielä yhtenäistää
 - [ ] **Responsiivisuus (alku):** Tarkistettu perustoimivuus mobiililla.
   - _Muistiinpanot/Miten tehty:_
-- [ ] **Ensimmäinen julkaisu (Dev):** Julkaistu Verceliin/Netlifyhin. Linkki: [Lisää linkki tähän]
-  - _Muistiinpanot/Miten tehty:_
+- [Tehty] **Ensimmäinen julkaisu (Dev):** Julkaistu Verceliin/Netlifyhin. Linkki: (https://paljuvaraus.vercel.app/)
+  - Vercel on hyvä, tekee pipelinen repositoriosta ja luo domainin napin painalluksella!
 
 ---
 
