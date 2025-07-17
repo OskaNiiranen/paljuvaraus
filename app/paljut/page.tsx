@@ -17,8 +17,7 @@ const paljuData = {
     { period: "Vuorokausi (ma-to)", price: "90€" },
     { period: "Viikonloppu vrk (pe tai la)", price: "120€" },
     { period: "Koko viikonloppu (pe-su)", price: "200€" },
-    { period: "Koko viikko", price: "300€" },
-    { period: "Juhlapyhät (Juhannus, joulu, uusi vuosi)", price: "alk. 300€" },
+    { period: "Koko viikko (7 päivää)", price: "300€" },
   ],
   mainImageUrl: "/IMG_20201104_150509__01.jpg", // Varmista, että tämä kuva on /public-kansiossa
   galleryImages: [
@@ -90,7 +89,7 @@ export default function PaljuEsittelySivu() {
             {/* Hinnasto */}
             <div className="mt-8 bg-white p-6 rounded-lg shadow-sm border">
               <h3 className="text-xl font-bold text-center mb-4">
-                Hinnasto (sis. alv 24%)
+                Hinnasto (sis. alv 25,5%)
               </h3>
               <div className="space-y-2">
                 {paljuData.pricing.map((item, index) => (

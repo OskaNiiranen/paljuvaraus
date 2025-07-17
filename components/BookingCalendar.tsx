@@ -15,23 +15,40 @@ import { fi } from "date-fns/locale";
 // Hinnasto-objekti laskentaa varten
 const pricingRules = {
   weekdayPrice: 90,
-  weekendPrice: 120, // Hinta per päivä pe, la tai su
+  weekendPrice: 120,
+  fullWeekendPrice: 200, // LISÄTTY: Hinta pe-su varaukselle
+  fullWeekPrice: 300, // LISÄTTY: Hinta 7 päivän varaukselle
 };
 
 export default function BookingCalendar() {
   const [range, setRange] = useState<DateRange | undefined>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
+  // PÄIVITETTY HINNANLASKULOGIIKKA
   const calculatePrice = (selectedRange: DateRange) => {
     if (!selectedRange.from || !selectedRange.to) {
       return 0;
     }
 
-    let price = 0;
-    const days = differenceInCalendarDays(selectedRange.to, selectedRange.from);
+    const from = selectedRange.from;
+    const to = selectedRange.to;
+    const numberOfNights = differenceInCalendarDays(to, from);
+    const numberOfDays = numberOfNights + 1;
 
-    for (let i = 0; i <= days; i++) {
-      const currentDate = new Date(selectedRange.from);
+    // ERIKOISHINTA 1: Koko viikonloppu (pe-su, 3 päivää/2 yötä)
+    if (isFriday(from) && isSunday(to) && numberOfNights === 2) {
+      return pricingRules.fullWeekendPrice;
+    }
+
+    // ERIKOISHINTA 2: Koko viikko (7 päivää/6 yötä)
+    if (numberOfDays === 7) {
+      return pricingRules.fullWeekPrice;
+    }
+
+    // NORMAALI PÄIVÄKOHTAINEN LASKENTA
+    let price = 0;
+    for (let i = 0; i < numberOfDays; i++) {
+      const currentDate = new Date(from);
       currentDate.setDate(currentDate.getDate() + i);
 
       if (
@@ -58,6 +75,17 @@ export default function BookingCalendar() {
 
   const today = new Date();
 
+  // Rakennetaan dynaaminen linkki URL-parametreilla
+  const getKassaLink = () => {
+    if (!range?.from || !range?.to) {
+      return "/kassa";
+    }
+    const fromDate = range.from.toISOString();
+    const toDate = range.to.toISOString();
+
+    return `/kassa?from=${fromDate}&to=${toDate}&price=${totalPrice}`;
+  };
+
   return (
     <div className="bg-white p-4 sm:p-8 rounded-xl shadow-2xl">
       <p className="text-center text-gray-600 mb-4">
@@ -66,7 +94,6 @@ export default function BookingCalendar() {
         3. Jatka täyttämään tietosi.
       </p>
 
-      {/* Kalenterikomponentti */}
       <div className="flex justify-center">
         <DayPicker
           mode="range"
@@ -83,13 +110,12 @@ export default function BookingCalendar() {
         />
       </div>
 
-      {/* Hinta ja varausnappi */}
       <div className="text-center mt-6">
         <p className="text-2xl font-bold mb-4">
           Hinta yhteensä: <span className="text-blue-600">{totalPrice}€</span>
         </p>
         <Link
-          href="/kassa"
+          href={getKassaLink()}
           className={`inline-block w-full sm:w-auto text-white font-bold text-lg rounded-lg px-12 py-4 transition-transform transform hover:scale-105 shadow-xl ${
             !range || !range.to
               ? "bg-gray-400 cursor-not-allowed"
