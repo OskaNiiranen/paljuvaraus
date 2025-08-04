@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation"; // Lisätty useRouter
 import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 
@@ -11,12 +11,16 @@ const getMockDistance = async (
   return new Promise((resolve) => {
     setTimeout(() => {
       if (zipCode.startsWith("04")) {
+        // Esim. Tuusula, Järvenpää, Kerava
         resolve({ distance: 15, message: "Etäisyys on noin 15 km." });
       } else if (zipCode.startsWith("01") || zipCode.startsWith("00")) {
+        // Esim. Vantaa, Helsinki
         resolve({ distance: 35, message: "Etäisyys on noin 35 km." });
       } else if (zipCode.startsWith("05")) {
+        // Esim. Hyvinkää
         resolve({ distance: 45, message: "Etäisyys on noin 45 km." });
       } else if (zipCode.startsWith("1")) {
+        // Esim. Lahti, Hämeenlinna
         resolve({ distance: 80, message: "Etäisyys on yli 50 km." });
       } else {
         resolve({ distance: 100, message: "Postinumeroa ei tunnistettu." });
@@ -28,6 +32,7 @@ const getMockDistance = async (
 // Komponentti, joka sisältää kaiken logiikan ja näkymän
 function KassaContent() {
   const searchParams = useSearchParams();
+  const router = useRouter(); // Otetaan router käyttöön
 
   const fromDateStr = searchParams.get("from");
   const toDateStr = searchParams.get("to");
@@ -63,14 +68,11 @@ function KassaContent() {
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [deliveryInfo, setDeliveryInfo] = useState("");
   const [isCheckingDistance, setIsCheckingDistance] = useState(false);
-
-  // LISÄTTY: Tila polttopuusäkkien määrälle
   const [firewoodBags, setFirewoodBags] = useState(0);
   const firewoodPricePerBag = 10;
   const firewoodCost = firewoodBags * firewoodPricePerBag;
-
-  // PÄIVITETTY: Lasketaan kokonaishinta
   const totalPrice = bookingDetails.basePrice + deliveryCost + firewoodCost;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (deliveryMethod === "delivery" && formData.zipCode.length === 5) {
@@ -111,20 +113,45 @@ function KassaContent() {
     setFormData((prev) => ({ ...prev, [name]: inputValue }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.termsAccepted) {
       alert("Hyväksy vuokrausehdot jatkaaksesi.");
       return;
     }
-    console.log("Lähetetään varaus:", {
+    setIsSubmitting(true);
+
+    const submissionData = {
       booking: bookingDetails,
       customer: formData,
       delivery: { method: deliveryMethod, cost: deliveryCost },
-      extras: { firewoodBags: firewoodBags, cost: firewoodCost }, // LISÄTTY
+      extras: { firewoodBags: firewoodBags, cost: firewoodCost },
       total: totalPrice,
-    });
-    alert("Varauspyyntö lähetetty! (Tämä on vain demo)");
+    };
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Viestin lähetys epäonnistui");
+      }
+
+      // KORVATTU ALERT OHJAUKSELLA KIITOSSIVULLE
+      router.push("/kiitos");
+    } catch (error) {
+      console.error(error);
+      alert(
+        "Pahoittelut, varauksen lähetyksessä tapahtui virhe. Yritä uudelleen."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -145,7 +172,6 @@ function KassaContent() {
             <div>
               <h2 className="text-2xl font-bold mb-6">Yhteystietosi</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {/* Kentät kuten ennenkin... */}
                 <div>
                   <label
                     htmlFor="firstName"
@@ -336,7 +362,7 @@ function KassaContent() {
               )}
             </div>
 
-            {/* LISÄTTY: Lisäpalvelut */}
+            {/* Lisäpalvelut */}
             <div>
               <h2 className="text-2xl font-bold mb-6">Lisäpalvelut</h2>
               <div className="bg-white p-4 border rounded-lg">
@@ -445,10 +471,15 @@ function KassaContent() {
                   !formData.termsAccepted ||
                   (deliveryMethod === "delivery" &&
                     deliveryCost === 0 &&
-                    formData.zipCode.length === 5)
+                    formData.zipCode.length === 5) ||
+                  isSubmitting
                 }
               >
-                {isCheckingDistance ? "Tarkistetaan..." : "Lähetä varauspyyntö"}
+                {isSubmitting
+                  ? "Lähetetään..."
+                  : isCheckingDistance
+                  ? "Tarkistetaan..."
+                  : "Lähetä varauspyyntö"}
               </button>
               <p className="text-xs text-gray-500 mt-4 text-center">
                 Vahvistamme varauksen ja lähetämme maksuohjeet sähköpostiisi.
