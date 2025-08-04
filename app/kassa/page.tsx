@@ -369,7 +369,7 @@ function KassaContent() {
                 <div className="flex justify-between items-center">
                   <div>
                     <h4 className="font-semibold text-gray-800">
-                      Koivuklapit (40L säkki)
+                      Koivuklapit (40L säkki) 10€ per säkki
                     </h4>
                     <p className="text-sm text-gray-500">
                       Yksi säkki riittää yhteen lämmityskertaan (n. 37°C).
@@ -478,8 +478,8 @@ function KassaContent() {
                 {isSubmitting
                   ? "Lähetetään..."
                   : isCheckingDistance
-                  ? "Tarkistetaan..."
-                  : "Lähetä varauspyyntö"}
+                    ? "Tarkistetaan..."
+                    : "Lähetä varauspyyntö"}
               </button>
               <p className="text-xs text-gray-500 mt-4 text-center">
                 Vahvistamme varauksen ja lähetämme maksuohjeet sähköpostiisi.
