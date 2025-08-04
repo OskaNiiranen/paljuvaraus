@@ -8,7 +8,7 @@ export default function Home() {
       <section className="relative flex items-center justify-center h-screen">
         {/* Taustakuva */}
         <Image
-          src="/IMG_20201104_150509__01.jpg"
+          src="/palju1.jpg"
           alt="Tunnelmallinen kuva paljusta"
           layout="fill"
           objectFit="cover"
@@ -22,22 +22,23 @@ export default function Home() {
         {/* Hero-osion sisältö */}
         <div className="z-10 text-center text-white px-4">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
-            Vuokraa palju ja nauti elämyksestä
+            Vuokraa paljukärrymme helposti, huoletta ja hyvään hintaan!
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 drop-shadow-md">
-            Helppo online-varaus, aina puhtaat ja laadukkaat paljut. Löydä
-            täydellinen palju rentoutumiseen ja juhliin.
+            Etsitkö paljukärryä juhliin, viikonlopuksi tai lomalle? Olet
+            oikeassa paikassa! Meiltä varaaminen on helppoa, ja teet sen
+            mutkattomasti ilman sisäänkirjautumista tai markkinointiviestejä.
+            Halutessasi saat paljukärrymme pihallesi toimitettuna ja koivuklapit
+            mukana, joten ei muuta kuin palju lämpimäksi ja kylpemään!
           </p>
-          {/* TÄMÄ ON MUUTETTU KOHTA */}
           <Link
-            href="/paljut" // MUUTETTU: Ohjaa nyt suoraan paljun esittelysivulle
+            href="/paljut"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-lg px-8 py-4 transition-transform transform hover:scale-105 shadow-xl"
           >
-            Katso palju ja varaa
+            Tutustu ja varaa
           </Link>
         </div>
       </section>
-
       {/* Tähän alle voidaan lisätä muita osioita, kuten "Miksi valita meidät?" */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto text-center px-4">
@@ -46,36 +47,41 @@ export default function Home() {
             {/* Ominaisuus 1 */}
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">
-                Helppo Online-Varaus
+                Helppo ja huoleton Online-varaus
               </h3>
               <p className="text-gray-600">
-                Varaa palju muutamassa minuutissa, milloin tahansa.
+                Ymmärrämme asiakaskokemuksen ja yksityisyyden tärkeyden. Siksi
+                emme vaadi sisäänkirjautumista, käytä seurantakoodeja,
+                markkinointievästeitä tai lähetä uutiskirjeitä. Tietojasi
+                käytetään ainoastaan varauksesi käsittelyyn.
               </p>
             </div>
             {/* Ominaisuus 2 */}
             <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">
-                Aina Puhtaat Paljut
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Aina puhdas palju</h3>
               <p className="text-gray-600">
-                Panostamme hygieniaan, jotta kokemuksesi on täydellinen.
+                Hygienia on meille ensiarvoisen tärkeää. Siksi pesemme ja
+                desinfioimme paljun perusteellisesti jokaisen vuokrauksen
+                jälkeen, ilman lisämaksua. Kun vuokraat paljukärryn meiltä, voit
+                olla varma sen puhtaudesta ja turvallisuudesta.
               </p>
             </div>
             {/* Ominaisuus 3 */}
             <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">Selkeät Ohjeet</h3>
+              <h3 className="text-xl font-semibold mb-2">
+                Laatu ja turvallisuus
+              </h3>
               <p className="text-gray-600">
-                Saat kattavat ohjeet paljun käyttöön ja noutoon.
+                Panostamme turvallisuuteen. Paljukärryssämme on tukevat kaiteet
+                ja rappuset, joiden avulla liikkuminen kärryssä ja paljuun
+                nouseminen on turvallista. Lisäksi kahdeksan tukijalkaa
+                varmistavat, että kärry pysyy tukevasti ja tasaisesti
+                paikoillaan myös epätasaisella alustalla.
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Tähän tulee myöhemmin Footer-komponentti */}
-      <footer className="bg-gray-800 text-white p-4 text-center">
-        <p>© 2025 PaljuVaraus - Kaikki oikeudet pidätetään.</p>
-      </footer>
     </main>
   );
 }

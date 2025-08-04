@@ -18,8 +18,8 @@ export default function KiitosSivu() {
             <span className="font-semibold">info@paljuvaraus.fi</span>.
           </p>
           <p className="mt-2 text-gray-600">
-            Käsittelemme varauspyyntösi mahdollisimman pian. Kun varaus on
-            vahvistettu, lähetämme sinulle laskun maksuohjeineen samasta
+            Käsittelemme varauspyyntösi mahdollisimman pian. Kun se on
+            käsitelty, lähetämme sinulle laskun maksuohjeineen samasta
             sähköpostiosoitteesta.
           </p>
 
@@ -28,8 +28,8 @@ export default function KiitosSivu() {
               Tarvitsetko apua?
             </h2>
             <p className="text-gray-700">
-              Jos sinulla on kysyttävää, tai haluat muokata tai perua
-              varauksesi, voit olla meihin yhteydessä:
+              Jos sinulla on kysyttävää, tai haluat muuttaa varaustasi, ota
+              meihin yhteyttä:
             </p>
             <ul className="mt-2 list-inside list-disc">
               <li>

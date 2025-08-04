@@ -1,54 +1,66 @@
+"use client"; // Tarvitaan, koska käytämme useState-hookia
+
+import { useState } from "react";
 import Image from "next/image";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
-import BookingCalendar from "@/components/BookingCalendar"; // Tuodaan uusi kalenterikomponentti
+import BookingCalendar from "@/components/BookingCalendar";
 
 // Data tälle yhdelle paljulle.
 const paljuData = {
   name: "Käsinrakennettu Paljukärrymme",
-  capacity: "6-8 hengelle",
+  capacity: "7 henkilölle",
   description:
-    "Nauti mukavista ja rentouttavista hetkistä tässä laadukkaassa käsintehdyssä paljukärryssä. Tiekäyttöön rekisteröity kärry on helppo kuljettaa ja pystyttää. Tehokas puukamiina takaa nopean lämmityksen ja rentouttavan kylpykokemuksen.",
+    "Paljukärrymme on rekisteröity ja vakuutettu tieliikennekäyttöön, joten voit kuljettaa sitä huoletta B-ajokortilla. Turvallisuuden takaamiseksi kärryssä on tukevat kaiteet ja rappuset, joiden avulla liikkuminen kärryssä ja paljuun nouseminen on turvallista. Lisäksi kahdeksan tukijalkaa varmistavat, että kärry pysyy tukevasti ja tasaisesti paikoillaan jopa epätasaisella alustalla. Palju lämpenee tehokkaalla 35 kW kamiinalla, jossa on vesivaippa, joten sen ulkopinta ei pääse ylikuumenemaan. Paljuun mahtuu 1540 litraa vettä, joka lämpenee noin 2 tunnissa 37 asteeseen. Tämä vaatii noin 40 litraa koivuklapeja, kunhan kansi on kiinni lämmityksen ajan. Hygienia on meille ensiarvoisen tärkeää. Siksi palju on aina pesty ja desinfioitu perusteellisesti ennen jokaista luovutusta.",
   included: [
-    "Tehokas uppopumppu täyttöön",
-    "Poistoletku tyhjennystä varten",
-    "Yksi pesällinen polttopuita alkuun pääsemiseksi",
+    "Palikat kärryn jalkojen alle tasaiseen asennukseen",
+    "Letkut paljun täyttöä ja tyhjennystä varten",
+    "Kelluva vedenlämpömittari",
+    "Paljun kylkeen asetettava juomateline",
+    "Paljun pesu vuokrauksen jälkeen",
   ],
   pricing: [
-    { period: "Vuorokausi (ma-to)", price: "90€" },
-    { period: "Viikonloppu vrk (pe tai la)", price: "120€" },
-    { period: "Koko viikonloppu (pe-su)", price: "200€" },
-    { period: "Koko viikko (7 päivää)", price: "300€" },
+    { period: "Vuorokausi (ma-to)", price: "70€" },
+    { period: "Viikonloppu vuorokausi (pe, la tai su)", price: "100€" },
+    { period: "Koko viikonloppu (pe-su)", price: "250€" },
+    { period: "Koko viikko", price: "300€" },
   ],
-  mainImageUrl: "/IMG_20201104_150509__01.jpg", // Varmista, että tämä kuva on /public-kansiossa
-  galleryImages: [
-    // Varmista, että myös nämä kuvat ovat /public-kansiossa
-    "/kylpytynnyri-karry-pahkina-lasiluukullinen-kamiina.png",
-    "/44_1d9b8dc0-d162-4723-b03e-d7fefa5fbeaf.jpg",
-    "/8DFCC0D9-9750-4238-A645-B452770ADBC9_1_201_a-scaled-1.jpeg",
-  ],
+  // Yhdistetty kaikki kuvat yhteen listaan
+  images: ["/palju1.jpg", "/palju2.jpg", "/palju3.jpg", "/palju4.jpg"],
 };
 
 export default function PaljuEsittelySivu() {
+  // Tila (state), joka pitää kirjaa aktiivisesta kuvasta.
+  // Oletuksena näytetään listan ensimmäinen kuva.
+  const [activeImage, setActiveImage] = useState(paljuData.images[0]);
+
   return (
     <div className="bg-gray-50">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Vasen palsta: Kuvat */}
           <div className="lg:col-span-3">
+            {/* Iso kuva-container */}
             <div className="relative h-96 w-full rounded-xl shadow-lg overflow-hidden mb-4">
               <Image
-                src={paljuData.mainImageUrl}
-                alt="Pääkuva paljukärrystä"
+                key={activeImage} // Avain auttaa Reactia tunnistamaan kuvan vaihdon
+                src={activeImage}
+                alt="Valittu kuva paljukärrystä"
                 fill
                 className="object-cover"
                 priority
               />
             </div>
-            <div className="grid grid-cols-3 gap-4">
-              {paljuData.galleryImages.map((src, index) => (
-                <div
+            {/* Pienet galleriakuvat */}
+            <div className="grid grid-cols-4 gap-4">
+              {paljuData.images.map((src, index) => (
+                <button
                   key={index}
-                  className="relative h-32 rounded-lg shadow-md overflow-hidden"
+                  onClick={() => setActiveImage(src)}
+                  className={`relative h-24 rounded-lg shadow-md overflow-hidden transition-all duration-200 ${
+                    activeImage === src
+                      ? "ring-2 ring-blue-500 ring-offset-2" // Korostus aktiiviselle kuvalle
+                      : "opacity-70 hover:opacity-100"
+                  }`}
                 >
                   <Image
                     src={src}
@@ -56,7 +68,7 @@ export default function PaljuEsittelySivu() {
                     fill
                     className="object-cover"
                   />
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -85,42 +97,42 @@ export default function PaljuEsittelySivu() {
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
 
-            {/* Hinnasto */}
-            <div className="mt-8 bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-xl font-bold text-center mb-4">
-                Hinnasto (sis. alv 25,5%)
-              </h3>
-              <div className="space-y-2">
-                {paljuData.pricing.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between border-b pb-1"
-                  >
-                    <span className="text-gray-600">{item.period}</span>
-                    <span className="font-semibold text-gray-900">
-                      {item.price}
-                    </span>
-                  </div>
-                ))}
+        {/* Varauskalenteri ja Hinnasto -osio */}
+        <div className="mt-12 pt-8 border-t">
+          <h2 className="text-3xl font-bold text-center mb-10">
+            Varauskalenteri
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+            {/* Vasen palsta: Kalenteri */}
+            <div className="lg:col-span-3">
+              <BookingCalendar />
+            </div>
+
+            {/* Oikea palsta: Hinnasto */}
+            <div className="lg:col-span-2">
+              <div className="sticky top-8 bg-white p-6 rounded-lg shadow-lg border">
+                <h3 className="text-xl font-bold text-center mb-4">Hinnasto</h3>
+                <div className="space-y-2">
+                  {paljuData.pricing.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between border-b py-2"
+                    >
+                      <span className="text-gray-600">{item.period}</span>
+                      <span className="font-semibold text-gray-900">
+                        {item.price}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* === KORJATTU VARAUSKALENTERI-OSIO === */}
-        <div className="mt-12 pt-8 border-t">
-          <h2 className="text-3xl font-bold text-center mb-6">Tee varaus</h2>
-          <div className="max-w-2xl mx-auto">
-            {/* Tässä kohtaa käytetään uutta, toimivaa komponenttia */}
-            <BookingCalendar />
-          </div>
-        </div>
       </main>
-
-      <footer className="bg-gray-800 text-white p-4 text-center mt-12">
-        <p>© 2025 PaljuVaraus - Kaikki oikeudet pidätetään.</p>
-      </footer>
     </div>
   );
 }

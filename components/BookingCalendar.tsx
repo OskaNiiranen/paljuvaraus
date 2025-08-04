@@ -12,19 +12,19 @@ import {
 } from "date-fns";
 import { fi } from "date-fns/locale";
 
-// Hinnasto-objekti laskentaa varten
+// Hinnasto-objekti laskentaa varten - PÄIVITETTY HINNOITTELU
 const pricingRules = {
-  weekdayPrice: 90,
-  weekendPrice: 120,
-  fullWeekendPrice: 200, // LISÄTTY: Hinta pe-su varaukselle
-  fullWeekPrice: 300, // LISÄTTY: Hinta 7 päivän varaukselle
+  weekdayPrice: 70,
+  weekendPrice: 100,
+  fullWeekendPrice: 250, // Hinta pe-su varaukselle
+  fullWeekPrice: 300, // Hinta 7 päivän varaukselle
 };
 
 export default function BookingCalendar() {
   const [range, setRange] = useState<DateRange | undefined>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  // PÄIVITETTY HINNANLASKULOGIIKKA
+  // HINNANLASKULOGIIKKA
   const calculatePrice = (selectedRange: DateRange) => {
     if (!selectedRange.from || !selectedRange.to) {
       return 0;
@@ -89,9 +89,7 @@ export default function BookingCalendar() {
   return (
     <div className="bg-white p-4 sm:p-8 rounded-xl shadow-2xl">
       <p className="text-center text-gray-600 mb-4">
-        1. Valitse haluamasi alkamis- ja päättymispäivä kalenterista. <br />
-        2. Hinta päivittyy automaattisesti. <br />
-        3. Jatka täyttämään tietosi.
+        Valitse varauksesi alkamis- ja päättymispäivä kalenterista.
       </p>
 
       <div className="flex justify-center">
