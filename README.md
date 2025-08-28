@@ -1,4 +1,4 @@
-# PaljuVaraus Web-Applikaatio
+# Palju Paikka Web-Applikaatio
 
 Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakkaat voivat selata saatavilla olevia paljukärryjä, tarkistaa niiden saatavuuden ja tehdä varauksia. Ylläpitäjälle on (tai tulee olemaan) oma näkymä varausten ja kaluston hallintaan.
 
@@ -29,7 +29,7 @@ Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakk
 
     ```bash
     git clone [https://github.com/OskaNiiranen/PaljuVaraus](https://github.com/OskaNiiranen/PaljuVaraus)
-    cd paljuvaraus
+    cd paljupaikka
     ```
 
 2.  **Asenna riippuvuudet:**

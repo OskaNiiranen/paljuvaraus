@@ -15,7 +15,7 @@ export default function KiitosSivu() {
           <p className="mt-4 text-gray-600">
             Olemme lähettäneet sinulle varausvahvistuksen sähköpostitse
             osoitteesta{" "}
-            <span className="font-semibold">info@paljuvaraus.fi</span>.
+            <span className="font-semibold">info@paljupaikka.fi</span>.
           </p>
           <p className="mt-2 text-gray-600">
             Käsittelemme varauspyyntösi mahdollisimman pian. Kun se on
@@ -35,10 +35,10 @@ export default function KiitosSivu() {
               <li>
                 Sähköpostitse:{" "}
                 <a
-                  href="mailto:info@paljuvaraus.fi"
+                  href="mailto:info@paljupaikka.fi"
                   className="text-blue-600 hover:underline"
                 >
-                  info@paljuvaraus.fi
+                  info@paljupaikka.fi
                 </a>
               </li>
               <li>

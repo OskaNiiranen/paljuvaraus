@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 // API-avain luetaan turvallisesti ympäristömuuttujista
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Määritä oma sähköpostiosoitteesi tähän, jotta saat kopion varauksista
-const OMA_SAHKOPOSTI = "oska.niiranen@gmail.com";
+// Määritä sähköpostiosoitteet, joihin haluat kopion varauksista
+const OMA_SAHKOPOSTI = ["oska.niiranen@gmail.com", "info@paljupaikka.fi"];
 
 export async function POST(request: Request) {
   try {
@@ -19,15 +19,13 @@ export async function POST(request: Request) {
       );
     }
 
-    // Käytetään Resendin sallimaa oletusosoitetta kehitysvaiheessa.
-    // Kun olet ostanut ja verifioinut oman domainisi (esim. paljuvaraus.fi) Resendissä,
-    // voit vaihtaa tämän osoitteeseen info@paljuvaraus.fi.
-    const fromAddress = "PaljuVaraus <onboarding@resend.dev>";
+    // Nyt kun domain on vahvistettu, voimme käyttää omaa sähköpostiosoitetta.
+    const fromAddress = "Palju Paikka <info@paljupaikka.fi>";
 
     const { data, error } = await resend.emails.send({
       from: fromAddress,
       to: [customer.email], // Lähetetään asiakkaalle
-      bcc: [OMA_SAHKOPOSTI], // Lähetetään kopio sinulle
+      bcc: OMA_SAHKOPOSTI, // Lähetetään kopio sinulle
       subject: "Varauspyyntösi on vastaanotettu!",
       html: `
         <h1>Kiitos varauspyynnöstäsi, ${customer.firstName}!</h1>
@@ -59,7 +57,7 @@ export async function POST(request: Request) {
             : ""
         }
         <hr>
-        <p>Jos sinulla on kysyttävää, voit vastata tähän viestiin tai ottaa yhteyttä info@paljuvaraus.fi / 0400 444 979.</p>
+        <p>Jos sinulla on kysyttävää, voit vastata tähän viestiin tai ottaa yhteyttä info@paljupaikka.fi / 0400 444 979.</p>
       `,
     });
 

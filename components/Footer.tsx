@@ -34,10 +34,10 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="mailto:info@paljuvaraus.fi"
+                  href="mailto:info@paljupaikka.fi"
                   className="hover:text-white transition-colors"
                 >
-                  info@paljuvaraus.fi
+                  info@paljupaikka.fi
                 </a>
               </li>
               <li>
@@ -56,7 +56,7 @@ export default function Footer() {
 
           {/* Osa 3: Yrityksen tiedot */}
           <div>
-            <h3 className="font-bold text-white text-lg mb-4">PaljuVaraus</h3>
+            <h3 className="font-bold text-white text-lg mb-4">Palju Paikka</h3>
             <p>Ei muuta kuin palju lämpimäksi ja kylpemään!</p>
             <p className="mt-2 text-sm">Y-tunnus: 3534960-8</p>
           </div>
@@ -64,7 +64,7 @@ export default function Footer() {
       </div>
       <div className="bg-gray-900 py-4">
         <p className="text-center text-gray-400 text-sm">
-          © {new Date().getFullYear()} PaljuVaraus - Kaikki oikeudet
+          © {new Date().getFullYear()} Palju Paikka - Kaikki oikeudet
           pidätetään.
         </p>
       </div>
