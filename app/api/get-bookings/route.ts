@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/firebase";
 import { collection, getDocs, query } from "firebase/firestore";
-import { eachDayOfInterval } from "date-fns";
+import { eachDayOfInterval, startOfDay } from "date-fns";
 
 export async function GET() {
   try {
@@ -13,12 +13,14 @@ export async function GET() {
 
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      // Varmistetaan, että startDate ja endDate ovat olemassa ja oikeassa muodossa
       if (data.startDate && data.endDate) {
-        const startDate = new Date(data.startDate);
-        const endDate = new Date(data.endDate);
+        // --- TÄMÄ ON KORJAUS ---
+        // Muunnetaan ISO-merkkijonot Date-objekteiksi ja käytetään startOfDay-funktiota
+        // poistamaan aikavyöhyke-erojen vaikutus.
+        const startDate = startOfDay(new Date(data.startDate));
+        const endDate = startOfDay(new Date(data.endDate));
+        // -------------------------
 
-        // Luodaan lista kaikista päivistä varauksen alku- ja loppupäivän välillä
         const intervalDates = eachDayOfInterval({
           start: startDate,
           end: endDate,
