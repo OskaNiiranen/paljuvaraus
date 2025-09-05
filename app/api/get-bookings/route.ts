@@ -20,14 +20,12 @@ export async function GET() {
         // Lisäämällä 3 tuntia varmistamme, että saamme oikean päivän riippumatta
         // palvelimen aikavyöhykkeestä.
         const bookingStart = addHours(new Date(data.startDate), 3);
-        const checkoutDate = addHours(new Date(data.endDate), 3);
+        const bookingEnd = addHours(new Date(data.endDate), 3);
 
-        // Uloskirjautumispäivän ei kuulu olla varattuna, joten otetaan sitä edeltävä päivä.
-        const lastBookedDay = subDays(checkoutDate, 1);
-
+        // Koko varattu aikaväli, mukaan lukien viimeinen päivä, merkitään varatuksi.
         const intervalDates = eachDayOfInterval({
           start: bookingStart,
-          end: lastBookedDay,
+          end: bookingEnd,
         });
         disabledDates = [...disabledDates, ...intervalDates];
       }
