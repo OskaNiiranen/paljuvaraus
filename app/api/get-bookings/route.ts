@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/firebase";
 import { collection, getDocs, query } from "firebase/firestore";
-import { eachDayOfInterval, startOfDay } from "date-fns";
+import { eachDayOfInterval, subDays, addHours } from "date-fns";
 
 export async function GET() {
   try {
@@ -14,16 +14,20 @@ export async function GET() {
     querySnapshot.forEach((doc) => {
       const data = doc.data();
       if (data.startDate && data.endDate) {
-        // --- TÄMÄ ON KORJAUS ---
-        // Muunnetaan ISO-merkkijonot Date-objekteiksi ja käytetään startOfDay-funktiota
-        // poistamaan aikavyöhyke-erojen vaikutus.
-        const startDate = startOfDay(new Date(data.startDate));
-        const endDate = startOfDay(new Date(data.endDate));
-        // -------------------------
+        // Firestoresta tulevat päivämäärät ovat UTC-aikamerkkijonoja, jotka edustavat
+        // päivän alkua Suomen ajassa (UTC+3). Esim. 22.9. klo 00:00 on tallennettu
+        // muodossa 21.9. klo 21:00 UTC.
+        // Lisäämällä 3 tuntia varmistamme, että saamme oikean päivän riippumatta
+        // palvelimen aikavyöhykkeestä.
+        const bookingStart = addHours(new Date(data.startDate), 3);
+        const checkoutDate = addHours(new Date(data.endDate), 3);
+
+        // Uloskirjautumispäivän ei kuulu olla varattuna, joten otetaan sitä edeltävä päivä.
+        const lastBookedDay = subDays(checkoutDate, 1);
 
         const intervalDates = eachDayOfInterval({
-          start: startDate,
-          end: endDate,
+          start: bookingStart,
+          end: lastBookedDay,
         });
         disabledDates = [...disabledDates, ...intervalDates];
       }
