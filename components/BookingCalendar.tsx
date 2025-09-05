@@ -12,45 +12,58 @@ import {
 } from "date-fns";
 import { fi } from "date-fns/locale";
 
-// Hinnasto-objekti laskentaa varten - PÄIVITETTY HINNOITTELU
 const pricingRules = {
   weekdayPrice: 70,
   weekendPrice: 100,
-  fullWeekendPrice: 250, // Hinta pe-su varaukselle
-  fullWeekPrice: 300, // Hinta 7 päivän varaukselle
+  fullWeekendPrice: 250,
+  fullWeekPrice: 300,
 };
 
 export default function BookingCalendar() {
   const [range, setRange] = useState<DateRange | undefined>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  // LISÄTTY: Tila, johon tallennetaan varatut päivät
+  const [disabledDates, setDisabledDates] = useState<Date[]>([]);
 
-  // HINNANLASKULOGIIKKA
+  // LISÄTTY: Haetaan varatut päivät, kun komponentti ladataan
+  useEffect(() => {
+    const fetchBookedDates = async () => {
+      try {
+        const response = await fetch("/api/get-bookings");
+        const data = await response.json();
+
+        // Muutetaan päivämäärämerkkijonot Date-objekteiksi
+        const dates = data.disabledDates.map(
+          (dateStr: string) => new Date(dateStr)
+        );
+        setDisabledDates(dates);
+      } catch (error) {
+        console.error("Failed to fetch booked dates:", error);
+      }
+    };
+
+    fetchBookedDates();
+  }, []);
+
   const calculatePrice = (selectedRange: DateRange) => {
-    if (!selectedRange.from || !selectedRange.to) {
-      return 0;
-    }
+    if (!selectedRange.from || !selectedRange.to) return 0;
 
     const from = selectedRange.from;
     const to = selectedRange.to;
     const numberOfNights = differenceInCalendarDays(to, from);
     const numberOfDays = numberOfNights + 1;
 
-    // ERIKOISHINTA 1: Koko viikonloppu (pe-su, 3 päivää/2 yötä)
     if (isFriday(from) && isSunday(to) && numberOfNights === 2) {
       return pricingRules.fullWeekendPrice;
     }
-
-    // ERIKOISHINTA 2: Koko viikko (7 päivää/6 yötä)
     if (numberOfDays === 7) {
       return pricingRules.fullWeekPrice;
     }
 
-    // NORMAALI PÄIVÄKOHTAINEN LASKENTA
     let price = 0;
     for (let i = 0; i < numberOfDays; i++) {
       const currentDate = new Date(from);
       currentDate.setDate(currentDate.getDate() + i);
-
       if (
         isFriday(currentDate) ||
         isSaturday(currentDate) ||
@@ -66,8 +79,7 @@ export default function BookingCalendar() {
 
   useEffect(() => {
     if (range && range.from && range.to) {
-      const newPrice = calculatePrice(range);
-      setTotalPrice(newPrice);
+      setTotalPrice(calculatePrice(range));
     } else {
       setTotalPrice(0);
     }
@@ -75,14 +87,10 @@ export default function BookingCalendar() {
 
   const today = new Date();
 
-  // Rakennetaan dynaaminen linkki URL-parametreilla
   const getKassaLink = () => {
-    if (!range?.from || !range?.to) {
-      return "/kassa";
-    }
+    if (!range?.from || !range?.to) return "/kassa";
     const fromDate = range.from.toISOString();
     const toDate = range.to.toISOString();
-
     return `/kassa?from=${fromDate}&to=${toDate}&price=${totalPrice}`;
   };
 
@@ -91,14 +99,14 @@ export default function BookingCalendar() {
       <p className="text-center text-gray-600 mb-4">
         Valitse varauksesi alkamis- ja päättymispäivä kalenterista.
       </p>
-
       <div className="flex justify-center">
         <DayPicker
           mode="range"
           selected={range}
           onSelect={setRange}
           numberOfMonths={1}
-          disabled={{ before: today }}
+          // PÄIVITETTY: Estetään menneet päivät JA tietokannasta haetut varatut päivät
+          disabled={[{ before: today }, ...disabledDates]}
           locale={fi}
           className="p-0 m-0"
           styles={{
@@ -107,7 +115,6 @@ export default function BookingCalendar() {
           }}
         />
       </div>
-
       <div className="text-center mt-6">
         <p className="text-2xl font-bold mb-4">
           Hinta yhteensä: <span className="text-blue-600">{totalPrice}€</span>
@@ -120,9 +127,7 @@ export default function BookingCalendar() {
               : "bg-blue-600 hover:bg-blue-700"
           }`}
           onClick={(e) => {
-            if (!range || !range.to) {
-              e.preventDefault();
-            }
+            if (!range || !range.to) e.preventDefault();
           }}
         >
           Jatka varaukseen

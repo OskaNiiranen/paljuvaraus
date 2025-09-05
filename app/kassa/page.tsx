@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation"; // Lisätty useRouter
+import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 
@@ -32,7 +32,7 @@ const getMockDistance = async (
 // Komponentti, joka sisältää kaiken logiikan ja näkymän
 function KassaContent() {
   const searchParams = useSearchParams();
-  const router = useRouter(); // Otetaan router käyttöön
+  const router = useRouter();
 
   const fromDateStr = searchParams.get("from");
   const toDateStr = searchParams.get("to");
@@ -73,6 +73,7 @@ function KassaContent() {
   const firewoodCost = firewoodBags * firewoodPricePerBag;
   const totalPrice = bookingDetails.basePrice + deliveryCost + firewoodCost;
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (deliveryMethod === "delivery" && formData.zipCode.length === 5) {
@@ -116,16 +117,30 @@ function KassaContent() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.termsAccepted) {
-      alert("Hyväksy vuokrausehdot jatkaaksesi.");
+      setAlertMessage("Hyväksy vuokrausehdot jatkaaksesi.");
       return;
     }
     setIsSubmitting(true);
+    setAlertMessage(null);
 
-    const submissionData = {
-      booking: bookingDetails,
+    const apiBookingDetails = {
+      productName: bookingDetails.productName,
+      startDate: fromDateStr,
+      endDate: toDateStr,
+      basePrice: bookingDetails.basePrice,
+    };
+
+    const dataToSend = {
+      booking: apiBookingDetails,
       customer: formData,
-      delivery: { method: deliveryMethod, cost: deliveryCost },
-      extras: { firewoodBags: firewoodBags, cost: firewoodCost },
+      delivery: {
+        method: deliveryMethod,
+        cost: deliveryCost,
+      },
+      extras: {
+        firewoodBags,
+        cost: firewoodCost,
+      },
       total: totalPrice,
     };
 
@@ -135,18 +150,17 @@ function KassaContent() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(submissionData),
+        body: JSON.stringify(dataToSend),
       });
 
       if (!response.ok) {
         throw new Error("Viestin lähetys epäonnistui");
       }
 
-      // KORVATTU ALERT OHJAUKSELLA KIITOSSIVULLE
       router.push("/kiitos");
     } catch (error) {
       console.error(error);
-      alert(
+      setAlertMessage(
         "Pahoittelut, varauksen lähetyksessä tapahtui virhe. Yritä uudelleen."
       );
     } finally {
@@ -166,6 +180,14 @@ function KassaContent() {
       </div>
 
       <form onSubmit={handleSubmit}>
+        {alertMessage && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6"
+            role="alert"
+          >
+            <span className="block sm:inline">{alertMessage}</span>
+          </div>
+        )}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           <div className="lg:col-span-2 bg-white p-8 rounded-xl shadow-lg space-y-8">
             {/* Yhteystiedot */}

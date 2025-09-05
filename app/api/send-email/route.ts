@@ -1,5 +1,8 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+// LISÄTTY: Tuodaan tarvittavat osat Firebase-kirjastosta
+import { db } from "@/lib/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 // API-avain luetaan turvallisesti ympäristömuuttujista
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -19,24 +22,30 @@ export async function POST(request: Request) {
       );
     }
 
-    // Nyt kun domain on vahvistettu, voimme käyttää omaa sähköpostiosoitetta.
     const fromAddress = "Palju Paikka <info@paljupaikka.fi>";
 
-    const { data, error } = await resend.emails.send({
+    // 1. LÄHETÄ SÄHKÖPOSTI
+    const { data: emailData, error: emailError } = await resend.emails.send({
       from: fromAddress,
-      to: [customer.email], // Lähetetään asiakkaalle
-      bcc: OMA_SAHKOPOSTI, // Lähetetään kopio sinulle
+      to: [customer.email],
+      bcc: OMA_SAHKOPOSTI,
       subject: "Varauspyyntösi on vastaanotettu!",
       html: `
         <h1>Kiitos varauspyynnöstäsi, ${customer.firstName}!</h1>
-        <p>Olemme vastaanottaneet varauspyyntösi ja käsittelemme sen mahdollisimman pian. Vahvistamme varauksen ja lähetämme maksuohjeet erillisessä sähköpostissa.</p>
+        <p>Tämä on kuittaus varauspyynnöstäsi. Käsittelemme sen ja vahvistamme varauksen erikseen.</p>
         <h2>Varauksen tiedot:</h2>
         <ul>
           <li><strong>Tuote:</strong> ${booking.productName}</li>
           <li><strong>Ajanjakso:</strong> ${booking.startDate} - ${booking.endDate}</li>
           <li><strong>Vuokra:</strong> ${booking.basePrice}€</li>
-          <li><strong>Toimitus:</strong> ${delivery.cost}€ (${delivery.method === "pickup" ? "Nouto" : "Toimitus"})</li>
-          ${extras.firewoodBags > 0 ? `<li><strong>Polttopuut:</strong> ${extras.firewoodBags} säkkiä (${extras.cost}€)</li>` : ""}
+          <li><strong>Toimitus:</strong> ${delivery.cost}€ (${
+            delivery.method === "pickup" ? "Nouto" : "Toimitus"
+          })</li>
+          ${
+            extras.firewoodBags > 0
+              ? `<li><strong>Polttopuut:</strong> ${extras.firewoodBags} säkkiä (${extras.cost}€)</li>`
+              : ""
+          }
           <li><strong>Yhteensä:</strong> ${total}€</li>
         </ul>
         <h2>Asiakastiedot:</h2>
@@ -61,15 +70,38 @@ export async function POST(request: Request) {
       `,
     });
 
-    if (error) {
-      console.error("Resend error:", error);
+    if (emailError) {
+      console.error("Resend error:", emailError);
       return NextResponse.json(
-        { message: "Sähköpostin lähetys epäonnistui", error },
+        { message: "Sähköpostin lähetys epäonnistui", error: emailError },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ message: "Sähköposti lähetetty", data });
+    // 2. TALLENNA VARAUS FIRESTOREEN
+    try {
+      const bookingData = {
+        ...booking,
+        customer,
+        delivery,
+        extras,
+        total,
+        createdAt: new Date(),
+        status: "pending",
+      };
+
+      const docRef = await addDoc(collection(db, "bookings"), bookingData);
+      console.log("Document written with ID: ", docRef.id);
+    } catch (dbError) {
+      console.error("Error adding document to Firestore: ", dbError);
+      // Vaikka tietokantatallennus epäonnistuisi, sähköposti on jo lähtenyt.
+      // Lokitetaan virhe, mutta ei palauteta virhettä asiakkaalle.
+    }
+
+    return NextResponse.json({
+      message: "Sähköposti lähetetty ja varaus tallennettu",
+      data: emailData,
+    });
   } catch (error) {
     console.error("API route error:", error);
     return NextResponse.json(
