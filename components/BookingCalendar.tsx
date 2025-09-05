@@ -85,6 +85,41 @@ export default function BookingCalendar() {
     }
   }, [range]);
 
+  const handleSelect = (selectedRange: DateRange | undefined) => {
+    if (selectedRange?.from && selectedRange.to) {
+      let from = new Date(selectedRange.from);
+      let to = new Date(selectedRange.to);
+
+      // Varmistetaan, että `from` on ennen `to`-päivää
+      if (from > to) {
+        [from, to] = [to, from];
+      }
+
+      // Aloitetaan tarkistus `from`-päivän jälkeisestä päivästä
+      const day = new Date(from);
+      day.setDate(day.getDate() + 1);
+
+      while (day < to) {
+        if (
+          disabledDates.some(
+            (disabledDate) =>
+              disabledDate.getDate() === day.getDate() &&
+              disabledDate.getMonth() === day.getMonth() &&
+              disabledDate.getFullYear() === day.getFullYear()
+          )
+        ) {
+          // Löytyi estetty päivä valitulta ajanjaksolta.
+          // Nollataan valinta.
+          setRange(undefined);
+          return;
+        }
+        day.setDate(day.getDate() + 1);
+      }
+    }
+    // Jos estettyjä päiviä ei löytynyt, päivitetään tila.
+    setRange(selectedRange);
+  };
+
   const today = new Date();
 
   const getKassaLink = () => {
@@ -103,7 +138,7 @@ export default function BookingCalendar() {
         <DayPicker
           mode="range"
           selected={range}
-          onSelect={setRange}
+          onSelect={handleSelect}
           numberOfMonths={1}
           // PÄIVITETTY: Estetään menneet päivät JA tietokannasta haetut varatut päivät
           disabled={[{ before: today }, ...disabledDates]}
