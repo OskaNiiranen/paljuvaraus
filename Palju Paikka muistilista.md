@@ -2,8 +2,6 @@ Palju Paikka muistilista
 
 - Paljunkärryn käyttöohjeet
 - Palveluehdot sivu
-- Tilausvahvistuksen (automaattinen) ja laskun lähetys Ukko.fi (manuaalinen)
-- Asiakastietojen tallennus (Firebase)
 - Admin-tila missä voi rajata vuokrauspäiviä ja nähdä tilauksen tiedot - Admin-tilasta pitäisi pystyä saamaan asiakastiedot ulos
 - Harkitse QR-koodia esim. footeriin jonka avulla palvelun pystyy linkkaamaan vaikka kaverille.
 - Paljut sivu varaus-sivuksi

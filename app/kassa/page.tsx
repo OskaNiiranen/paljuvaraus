@@ -44,7 +44,7 @@ function KassaContent() {
   };
 
   const bookingDetails = {
-    productName: "Käsinrakennettu Paljukärrymme",
+    productName: "Paljukärryn vuokraus",
     startDate: formatDate(fromDateStr),
     endDate: formatDate(toDateStr),
     basePrice: priceStr ? parseInt(priceStr, 10) : 0,
@@ -171,11 +171,9 @@ function KassaContent() {
   return (
     <main className="container mx-auto px-4 py-12">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-extrabold text-gray-900">
-          Vahvista varaus
-        </h1>
+        <h1 className="text-4xl font-extrabold text-gray-900">Tee varaus</h1>
         <p className="mt-2 text-lg text-gray-600">
-          Olet melkein valmis! Täytä vain tietosi alle.
+          Olet melkein valmis! Täytä vain tietosi alle ja lue vuokrausehdot.
         </p>
       </div>
 

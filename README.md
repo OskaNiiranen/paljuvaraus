@@ -81,7 +81,7 @@ _Tavoite: Työkalut ja perussuunnitelma valmiina kehityksen aloittamiseen._
 
 _Tavoite: Näkyvä sivuston runko, jossa on perusinformaatio ja navigointi._
 
-- [x] **Sivupohjat:** Kaikki "putken" sivut on luotu: Etusivu (`/`), Esittelysivu (`/paljut`), Kassa (`/kassa`) ja Kiitossivu (`/kiitos`).
+- [x] **Sivupohjat:** Kaikki "putken" sivut on luotu: Etusivu (`/`), Varaussivu (`/varaus`), Kassa (`/kassa`) ja Kiitossivu (`/kiitos`).
 - [x] **Navigaatio:** Sivujen välinen navigointi toimii `next/link`-komponenteilla.
 - [x] **Sisältö:** Paljun tiedot ja hinnasto on lisätty staattisesti esittelysivulle.
 - [x] **Perustyylittely:** Sivustolla on yhtenäinen ja siisti ulkoasu Tailwind CSS:n avulla.

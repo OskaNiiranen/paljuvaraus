@@ -7,16 +7,16 @@ import BookingCalendar from "@/components/BookingCalendar";
 
 // Data tälle yhdelle paljulle.
 const paljuData = {
-  name: "Käsinrakennettu Paljukärrymme",
-  capacity: "7 henkilölle",
+  name: "Paljukärry",
+  capacity: "6-8 henkilölle",
   description:
-    "Paljukärrymme on rekisteröity ja vakuutettu tieliikennekäyttöön, joten voit kuljettaa sitä huoletta B-ajokortilla. Turvallisuuden takaamiseksi kärryssä on tukevat kaiteet ja rappuset, joiden avulla liikkuminen kärryssä ja paljuun nouseminen on turvallista. Lisäksi kahdeksan tukijalkaa varmistavat, että kärry pysyy tukevasti ja tasaisesti paikoillaan jopa epätasaisella alustalla. Palju lämpenee tehokkaalla 35 kW kamiinalla, jossa on vesivaippa, joten sen ulkopinta ei pääse ylikuumenemaan. Paljuun mahtuu 1540 litraa vettä, joka lämpenee noin 2 tunnissa 37 asteeseen. Tämä vaatii noin 40 litraa koivuklapeja, kunhan kansi on kiinni lämmityksen ajan. Hygienia on meille ensiarvoisen tärkeää. Siksi palju on aina pesty ja desinfioitu perusteellisesti ennen jokaista luovutusta.",
+    "Paljukärrymme on rekisteröity tieliikennekäyttöön, joten sitä voi kuljettaa henkilöautokortilla auton perässä. Turvallisuuden takaamiseksi käryssä on tukevat kaiteet ja rappuset, jotka tekevät liikkumisesta ja paljuun nousemisesta turvallista. Lisäksi kärryn kahdeksan tukijalkaa varmistavat, että se pysyy vakaasti ja tasaisesti paikoillaan epätasaisellakin alustalla. Palju lämpenee tehokkaalla 35 kW:n puulämmitteisellä kamiinalla, jossa on vesivaippa. Tämä lämmittää paljun veden ja estää kamiinan ulkopinnan ylikuumenemisen. Paljuun mahtuu 1540 litraa vettä, ja se lämpenee noin kahdessa tunnissa 37-asteiseksi, kun alkulämpötila on 10 astetta, ja kantta pidetään kiinni lämmityksen ajan. Lämmitykseen kuluu noin 40 litraa koivuklapeja, jotka voit ostaa meiltä kätevästi varauksen yhteydessä.",
   included: [
     "Palikat kärryn jalkojen alle tasaiseen asennukseen",
     "Letkut paljun täyttöä ja tyhjennystä varten",
     "Kelluva vedenlämpömittari",
+    "Mela veden sekoittamista varten",
     "Paljun kylkeen asetettava juomateline",
-    "Paljun pesu vuokrauksen jälkeen",
   ],
   pricing: [
     { period: "Vuorokausi (ma-to)", price: "70€" },
@@ -28,7 +28,7 @@ const paljuData = {
   images: ["/palju1.jpg", "/palju2.jpg", "/palju3.jpg", "/palju4.jpg"],
 };
 
-export default function PaljuEsittelySivu() {
+export default function VarausSivu() {
   // Tila (state), joka pitää kirjaa aktiivisesta kuvasta.
   // Oletuksena näytetään listan ensimmäinen kuva.
   const [activeImage, setActiveImage] = useState(paljuData.images[0]);

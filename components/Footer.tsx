@@ -14,15 +14,20 @@ export default function Footer() {
                   href="/kayttoohjeet"
                   className="hover:text-white transition-colors"
                 >
-                  Paljukärryn käyttöohjeet
+                  Käyttöohjeet
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/ehdot"
+                  href="/vuokrausehdot"
                   className="hover:text-white transition-colors"
                 >
                   Vuokrausehdot
+                </Link>
+              </li>
+              <li>
+                <Link href="/" className="hover:text-white transition-colors">
+                  Etusivulle
                 </Link>
               </li>
             </ul>
@@ -57,7 +62,7 @@ export default function Footer() {
           {/* Osa 3: Yrityksen tiedot */}
           <div>
             <h3 className="font-bold text-white text-lg mb-4">Palju Paikka</h3>
-            <p>Ei muuta kuin palju lämpimäksi ja kylpemään!</p>
+            <p>Ei muuta kuin palju lämpimäksi ja nauttimaan!</p>
             <p className="mt-2 text-sm">Y-tunnus: 3534960-8</p>
           </div>
         </div>
