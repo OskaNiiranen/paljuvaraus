@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Palju Paikka",
-  description: "Varaa paljukärry pihallesi tomitettuna.",
+  title: {
+    template: "%s | Palju Paikka",
+    default: "Palju Paikka",
+  },
+  description: "Varaa paljukärry helposti pihallesi toimitettuna.",
 };
 
 export default function RootLayout({

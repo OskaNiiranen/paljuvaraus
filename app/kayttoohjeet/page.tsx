@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Käyttöohjeet",
+};
+
 import { NextPage } from "next";
 import Image from "next/image";
 import Layout from "../../.next/types/routes";
@@ -40,6 +46,11 @@ const KayttoohjeetPage: NextPage = () => {
             kärryn valot toimivat.
           </li>
           <li>Kärryn renkaat ovat ehjät ja niissä on ilmaa.</li>
+          <li>
+            Paljukärry on rekisteröity O1-luokan kevytperävaunuksi. Kärry painaa
+            700 kg ja siinä jarrut. Sillä saa ajaa korkeintaan 100 km/h
+            moottoritiellä.
+          </li>
           <Image
             src="/nokkapyora.webp"
             alt="Kuva kärryn aisasta."

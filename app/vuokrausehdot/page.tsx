@@ -1,3 +1,9 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Vuokrausehdot',
+};
+
 import { NextPage } from "next";
 import Link from "next/link";
 

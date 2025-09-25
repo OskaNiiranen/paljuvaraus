@@ -1,3 +1,9 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Kiitos tilauksesta',
+};
+
 import Link from "next/link";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
