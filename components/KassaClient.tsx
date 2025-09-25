@@ -171,6 +171,20 @@ function KassaContent() {
     }
   };
 
+  const isFormInvalid =
+    !formData.firstName ||
+    !formData.lastName ||
+    !formData.email ||
+    !formData.phone ||
+    (deliveryMethod === "delivery" &&
+      (!formData.address || !formData.zipCode || !formData.city)) ||
+    !formData.vuokrausehdotAccepted ||
+    !formData.kayttoohjeetAccepted ||
+    (deliveryMethod === "delivery" &&
+      deliveryCost === 0 &&
+      formData.zipCode.length === 5) ||
+    isSubmitting;
+
   return (
     <main className="container mx-auto px-4 py-12">
       <div className="text-center mb-10">
@@ -518,14 +532,7 @@ function KassaContent() {
               <button
                 type="submit"
                 className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg rounded-lg py-3 transition shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
-                disabled={
-                  !formData.vuokrausehdotAccepted ||
-                  !formData.kayttoohjeetAccepted ||
-                  (deliveryMethod === "delivery" &&
-                    deliveryCost === 0 &&
-                    formData.zipCode.length === 5) ||
-                  isSubmitting
-                }
+                disabled={isFormInvalid}
               >
                 {isSubmitting
                   ? "Lähetetään..."
