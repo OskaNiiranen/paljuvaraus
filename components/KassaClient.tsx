@@ -537,11 +537,11 @@ function KassaContent() {
                 <hr className="my-2" />
                 <div className="flex justify-between">
                   <span>Vuokra:</span>
-                  <span>{bookingDetails.basePrice}€</span>
+                  <span>{bookingDetails.basePrice} €</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Toimitus:</span>
-                  <span>{deliveryCost}€</span>
+                  <span>{deliveryCost} €</span>
                 </div>
                 {firewoodBags > 0 && (
                   <div className="flex justify-between">
@@ -551,7 +551,7 @@ function KassaContent() {
                 )}
                 <div className="border-t pt-4 mt-4 flex justify-between text-xl font-bold">
                   <span>Yhteensä:</span>
-                  <span>{totalPrice}€</span>
+                  <span>{totalPrice} €</span>
                 </div>
               </div>
               <div className="mt-6 space-y-3">
