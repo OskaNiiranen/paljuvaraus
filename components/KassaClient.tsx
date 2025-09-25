@@ -445,7 +445,7 @@ function KassaContent() {
                 </div>
                 <hr className="my-2" />
                 <div className="flex justify-between">
-                  <span>Paljukärryn vuokra:</span>
+                  <span>Vuokra:</span>
                   <span>{bookingDetails.basePrice}€</span>
                 </div>
                 <div className="flex justify-between">
