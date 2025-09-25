@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Kiitos tilauksesta',
+  title: "Kiitos tilauksesta",
 };
 
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default function KiitosSivu() {
           <p className="mt-4 text-gray-600">
             Olemme lähettäneet sinulle varausvahvistuksen sähköpostitse
             osoitteesta{" "}
-            <span className="font-semibold">info@paljupaikka.fi</span>.
+            <span className="font-semibold">info@paljupaikka.fi</span>
           </p>
           <p className="mt-2 text-gray-600">
             Käsittelemme varauspyyntösi mahdollisimman pian. Kun se on

@@ -446,7 +446,7 @@ function KassaContent() {
           <div className="lg:col-span-1">
             <div className="bg-white p-6 rounded-xl shadow-lg sticky top-8">
               <h3 className="text-xl font-bold border-b pb-4 mb-4">
-                Tilauksesi yhteenveto
+                Varauksesi yhteenveto
               </h3>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
@@ -542,9 +542,6 @@ function KassaContent() {
                     ? "Tarkistetaan..."
                     : "Lähetä varauspyyntö"}
               </button>
-              <p className="text-xs text-gray-500 mt-4 text-center">
-                Vahvistamme varauksen ja lähetämme maksuohjeet sähköpostiisi.
-              </p>
             </div>
           </div>
         </div>
