@@ -9,6 +9,8 @@ import {
   isFriday,
   isSaturday,
   isSunday,
+  isMonday,
+  isThursday,
 } from "date-fns";
 import { fi } from "date-fns/locale";
 
@@ -17,6 +19,7 @@ const pricingRules = {
   weekendPrice: 100,
   fullWeekendPrice: 250,
   fullWeekPrice: 300,
+  allWeekdaysPrice: 230,
 };
 
 export default function BookingCalendar() {
@@ -53,6 +56,9 @@ export default function BookingCalendar() {
     const numberOfNights = differenceInCalendarDays(to, from);
     const numberOfDays = numberOfNights + 1;
 
+    if (isMonday(from) && isThursday(to) && numberOfNights === 3) {
+      return pricingRules.allWeekdaysPrice;
+    }
     if (isFriday(from) && isSunday(to) && numberOfNights === 2) {
       return pricingRules.fullWeekendPrice;
     }
@@ -130,7 +136,7 @@ export default function BookingCalendar() {
   };
 
   return (
-    <div className="bg-white p-4 sm:p-8 rounded-xl shadow-2xl">
+    <div className="top-8 bg-white p-6 rounded-lg shadow-lg border">
       <p className="text-center text-gray-600 mb-4">
         Valitse varauksesi alkamis- ja päättymispäivä kalenterista.
       </p>

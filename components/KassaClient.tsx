@@ -54,7 +54,9 @@ function KassaContent() {
     firstName: "",
     lastName: "",
     email: "",
+    emailConfirm: "",
     phone: "",
+    phoneConfirm: "",
     address: "",
     zipCode: "",
     city: "",
@@ -176,6 +178,8 @@ function KassaContent() {
     !formData.lastName ||
     !formData.email ||
     !formData.phone ||
+    formData.email !== formData.emailConfirm ||
+    formData.phone !== formData.phoneConfirm ||
     (deliveryMethod === "delivery" &&
       (!formData.address || !formData.zipCode || !formData.city)) ||
     !formData.vuokrausehdotAccepted ||
@@ -264,6 +268,30 @@ function KassaContent() {
                 </div>
                 <div className="sm:col-span-2">
                   <label
+                    htmlFor="emailConfirm"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Vahvista sähköposti *
+                  </label>
+                  <input
+                    type="email"
+                    name="emailConfirm"
+                    id="emailConfirm"
+                    value={formData.emailConfirm}
+                    onChange={handleInputChange}
+                    required
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                  {formData.email &&
+                    formData.emailConfirm &&
+                    formData.email !== formData.emailConfirm && (
+                      <p className="mt-2 text-sm text-red-600">
+                        Sähköpostit eivät täsmää.
+                      </p>
+                    )}
+                </div>
+                <div className="sm:col-span-2">
+                  <label
                     htmlFor="phone"
                     className="block text-sm font-medium text-gray-700"
                   >
@@ -278,6 +306,30 @@ function KassaContent() {
                     required
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                   />
+                </div>
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="phoneConfirm"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Vahvista puhelinnumero *
+                  </label>
+                  <input
+                    type="tel"
+                    name="phoneConfirm"
+                    id="phoneConfirm"
+                    value={formData.phoneConfirm}
+                    onChange={handleInputChange}
+                    required
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                  {formData.phone &&
+                    formData.phoneConfirm &&
+                    formData.phone !== formData.phoneConfirm && (
+                      <p className="mt-2 text-sm text-red-600">
+                        Puhelinnumerot eivät täsmää.
+                      </p>
+                    )}
                 </div>
               </div>
             </div>

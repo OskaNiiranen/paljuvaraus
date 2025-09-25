@@ -18,10 +18,11 @@ const paljuData = {
     "Paljun kylkeen asetettava juomateline",
   ],
   pricing: [
-    { period: "Vuorokausi (ma-to)", price: "70€" },
-    { period: "Viikonloppu vuorokausi (pe, la tai su)", price: "100€" },
+    { period: "Vuorokausi (ma, ti, ke, to)", price: "70€" },
+    { period: "Kaikki arkipäivät (ma-to)", price: "230€" },
+    { period: "Viikonloppu vuorokausi (pe, la, su)", price: "100€" },
     { period: "Koko viikonloppu (pe-su)", price: "250€" },
-    { period: "Koko viikko", price: "300€" },
+    { period: "Koko viikko (7 vuorokautta)", price: "300€" },
   ],
   images: [
     "/palju1.webp",
@@ -43,7 +44,7 @@ export default function VarausClient() {
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
           <div className="lg:col-span-3">
-            <div className="relative h-96 w-full rounded-xl shadow-lg overflow-hidden mb-4">
+            <div className="relative h-96 w-full rounded-xl shadow-lg overflow-hidden mb-4 border">
               <Image
                 key={activeImage}
                 src={activeImage}
