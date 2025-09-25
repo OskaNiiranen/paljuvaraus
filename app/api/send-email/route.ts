@@ -24,6 +24,16 @@ export async function POST(request: Request) {
 
     const fromAddress = "Palju Paikka <info@paljupaikka.fi>";
 
+    const formatDate = (dateString: string | null) => {
+      if (!dateString) return "Ei valittu";
+      const options: Intl.DateTimeFormatOptions = {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+      };
+      return new Date(dateString).toLocaleDateString("fi-FI", options);
+    };
+
     // 1. LÄHETÄ SÄHKÖPOSTI
     const { data: emailData, error: emailError } = await resend.emails.send({
       from: fromAddress,
@@ -32,11 +42,13 @@ export async function POST(request: Request) {
       subject: "Varauspyyntösi on vastaanotettu!",
       html: `
         <h1>Kiitos varauspyynnöstäsi, ${customer.firstName}!</h1>
-        <p>Tämä on kuittaus varauspyynnöstäsi. Käsittelemme sen ja vahvistamme varauksen erikseen.</p>
+        <p>Varauspyyntösi tuli perille onnistuneesti. Käsittelemme sen mahdollisimman pian ja vahvistamme varauksen lähettämällä sinulle laskun ja maksuohjeet sähköpostiisi.</p>
         <h2>Varauksen tiedot:</h2>
         <ul>
           <li><strong>Tuote:</strong> ${booking.productName}</li>
-          <li><strong>Ajanjakso:</strong> ${booking.startDate} - ${booking.endDate}</li>
+          <li><strong>Ajanjakso:</strong> ${formatDate(
+            booking.startDate
+          )} - ${formatDate(booking.endDate)}</li>
           <li><strong>Vuokra:</strong> ${booking.basePrice}€</li>
           <li><strong>Toimitus:</strong> ${delivery.cost}€ (${
             delivery.method === "pickup" ? "Nouto" : "Toimitus"
