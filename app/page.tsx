@@ -8,7 +8,7 @@ export default function Home() {
       <section className="relative flex items-center justify-center h-screen">
         {/* Taustakuva */}
         <Image
-          src="/palju1.jpg"
+          src="/palju1.webp"
           alt="Tunnelmallinen kuva paljusta"
           layout="fill"
           objectFit="cover"

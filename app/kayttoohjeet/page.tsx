@@ -1,9 +1,53 @@
 import { NextPage } from "next";
+import Image from "next/image";
+import Layout from "../../.next/types/routes";
 
 const KayttoohjeetPage: NextPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-6">Paljukärryn käyttöohjeet</h1>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Paljukärryn kuljetus</h2>
+        <h3 className="font-semibold mb-4">Ennen kuljetusta tarkista, että:</h3>
+        <ol className="list-decimal list-inside space-y-3">
+          <li>
+            Palju on tyhjennetty ja sen kansi on kiinni kaikilla kolmella
+            kiinnitysremmillä.
+          </li>
+          <Image
+            src="/kiinnitysremmi.webp"
+            alt="Kuva paljun kannen kiinnitysremmistä"
+            width={600}
+            height={600}
+          />
+          <li>
+            Kamiinan piippu on irroitettu kamiinasta ja varastoitu kärryn
+            rappusten taakse.
+          </li>
+          <li>Kamiina on tyhjä ja sen luukku on kiinni.</li>
+          <li>Kärryn päällä ei ole irtaimistoa.</li>
+          <li>Kärryn rappuset on nostettu ylös ja kiinnitetty liinalla.</li>
+          <li>
+            Kärry on kiinnitetty auton vetokoukkuun, niin, että kuulakytkin on
+            lukittunut vetokuulan ympärille.
+          </li>
+          <li>
+            Nokkapyörä sekä kaikki tukijalat ovat ylhäällä ja kiristettyinä.
+          </li>
+          <li>Kärryn käsijarru ei ole päällä.</li>
+          <li>
+            Kärryn virtajohto on kiinnitetty vetoauton pistokkeeseen, ja että
+            kärryn valot toimivat.
+          </li>
+          <li>Kärryn renkaat ovat ehjät ja niissä on ilmaa.</li>
+          <Image
+            src="/nokkapyora.webp"
+            alt="Kuva kärryn aisasta."
+            width={600}
+            height={600}
+          />
+        </ol>
+      </section>
 
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">
@@ -19,86 +63,113 @@ const KayttoohjeetPage: NextPage = () => {
             kärryä tällä tavalla jyrkässä ylä- tai alamäessä.
           </li>
           <li>
-            Kun paljukärry on lopullisessa paikassa, säädä nokkapyörästä kärry
-            vaakatasoon ja vedä kärryn käsijarru ylös, jotta kärry ei lähde
-            valumaan alamäkeen. Tue renkaita tarvittaessa rengaskiiloilla. Laske
-            kärryn tukijalat niin, että ne osuvat maahan, mutta eivät nosta
-            kärryä ylös maasta. Kun paljua täytetään, on hyvä, että paino
-            jakautuu myös kärryn jousille ja renkaille.
+            Kamiinaa käytettäessä on huomioitava kipinävaara. Suositeltava
+            turvaetäisyys rakennuksiin on 8 metriä.
           </li>
           <li>
-            Tarkista, että poistoputken vesitulppa on kiinni, kun alat
-            täyttämään paljua vedellä. Jos kiipeät paljuun, laske ainakin takana
-            olevat tukijalat alas, jotta paljukärryn takaosa ei kippaa. Älä astu
-            paljuun kengät jalassa, ettei paljuun mene roskia.
+            Aseta paljukärry lopulliseen paikkaansa, säädä se vaateriin
+            nokkapyörästä ja kiristä käsijarru, jotta kärry pysyy paikallaan.
+            Laske sitten tukijalat kärryn mukana tulevien tukipalojen päälle.
+            Säädä tukijalkoja kunnes kärry on vakaa eikä keiku.
           </li>
-          <li>Täytä palju</li>
+          <Image
+            src="/tukijalka.webp"
+            alt="Kuva kärryn tukijalasta."
+            width={600}
+            height={600}
+          />
           <li>
-            Kun palju on täytetty, laske kärryn tukijalat niin, että ne ottavat
-            kunnolla kiinni maahan. Jos paljukärryn alla oleva maa on pehmeää,
-            muista jakaa paino isommalle alueelle asettamalla tukijalkojen alle
-            esimerkiksi laudanpaloja. Löysää nokkapyörää, ettei paino kohdistu
-            siihen paljun täyttyessä.
+            Voit tarvittaessa käyttää kärryn tukemiseen myös pohjassa olevia
+            kulmatukia, joita säädetään kärryn mukana tulevalla kahvalla.
           </li>
+          <Image
+            src="/kulmatuki.webp"
+            alt="Kuva kärryn kulmatuesta ja kahvasta."
+            width={600}
+            height={600}
+          />
         </ol>
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Paljun lämmitys</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          Paljun täyttö ja lämmitys
+        </h2>
         <ol className="list-decimal list-inside space-y-3">
+          <li>
+            Tarkista, että poistoputken vesitulppa on kiinni ennen kuin alat
+            täyttämään paljua.
+          </li>
+          <Image
+            src="/poistoputki.webp"
+            alt="Kuva paljun poistoputkesta ja vesitulpasta."
+            width={600}
+            height={600}
+          />
+          <li>
+            Täytä palju mukana tulevalla letkulla käyttäen mahdollisimman
+            puhdasta vettä.
+          </li>
           <li>Laita kamiinan piippu paikoilleen ennen sytyttämistä.</li>
           <li>
-            Sytytä kamiina vasta, kun vesi on vähintään 5 cm ylemmän kamiinan
-            liitosputken yläpuolella. Kuivilla koivuklapeilla vesi lämpenee
-            nopeimmin. Sopiva veden lämpötila on noin 37 astetta. Liian lämmin
-            vesi on yhtä epämiellyttävää kuin liian kylmä vesi.
+            <strong>
+              Sytytä kamiina vasta, kun vesi on vähintään 5 cm ylemmän kamiinan
+              liitosputken yläpuolella!
+            </strong>
           </li>
-          <li>
-            Paljun lämmitys vie aikaa noin 2 – 4 tuntia riippuen veden
-            alkulämpötilasta, ulkolämpötilasta, käytettävistä puista jne. Kannen
-            pitäminen paikallaan lyhentää lämmitysaikaa.
-          </li>
+          <Image
+            src="/vesiraja.webp"
+            alt="Sytytä kamiina vasta, kun vesi on vähintään 5 cm ylemmän kamiinan
+            liitosputken yläpuolella!"
+            width={600}
+            height={600}
+          />
           <li>
             Käytä paljun lämmittämiseen kuivia polttopuita. Ohuet puut syttyvät
             helpommin kuin paksut, joten kamiinan sytytyksessä kannattaa käyttää
             ohuimpia puita. Sytykkeenä voit käyttää tuohta, sytytyspaloja, tai
-            sanomalehteä.{" "}
+            sanomalehteä.
+          </li>
+          <li>
             <strong>
               Kyllästetyn puun, talousjätteiden, roskien, muovien, lastulevyjen
               ym. polttaminen kamiinassa on ehdottomasti kielletty!
             </strong>
           </li>
           <li>
+            Paljun lämmitys vie aikaa noin 2 – 4 tuntia riippuen veden
+            alkulämpötilasta, ulkolämpötilasta, käytettävistä puista jne. Kannen
+            pitäminen kiinni lyhentää lämmitysaikaa.
+          </li>
+          <li>
             Vesi kiertää automaattisesti kamiinan ja paljun välillä veden
             lämmetessä. Vettä kannattaa kuitenkin sekoittaa muutaman kerran
-            lämmityksen aikana, kun tarkistat veden lämpötilaa, niin saat veden
-            keskilämpötilan.
+            lämmityksen aikana kun tarkistat veden lämpötilaa.
           </li>
           <li>
             Kun vesi alkaa olla noin 30-asteista, lisää puita maltillisesti.
             Veden ihannelämpötila on 37 astetta. Yli 40-asteinen vesi alkaa
             tuntua ennen pitkää epämukavalta, ja yli 45-asteinen vesi voi
-            aiheuttaa minuuttien kuluessa ensimmäisen asteen palovammoja.
+            aiheuttaa jo muutamissa minuuteissa ensimmäisen asteen palovammoja.
           </li>
           <li>
             Mikäli lämpötila laskee pakkasen puolelle, pidäthän huolen siitä
             ettei vesi pääse jäätymään. Jäätynyt vesi rikkoo pahimmassa
-            tapauksessa lasikuitualtaan ja kamiinan. Mikäli on riski
-            jäätymiselle, lisää riittävästi puita kylpemisen päätteeksi (esim.
-            yöksi) ja jatka lämmittämistä tarpeen mukaan seuraavana päivänä.
+            tapauksessa altaan ja kamiinan. Mikäli on riski jäätymiselle, vettä
+            täytyy joko lämmittää kamiinalla, tai palju pitää tyhjentää.
           </li>
         </ol>
       </section>
 
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">
-          Paljun tyhjennys ja valmistelut palautusta varten
+          Paljun tyhjennys ja puhdistaminen käytön jälkeen
         </h2>
         <ol className="list-decimal list-inside space-y-3">
           <li>
             <strong>
-              Paljua ei saa missään vaiheessa tyhjentää vedestä jos kamiinassa
-              on vielä tuli tai hiillos!
+              Paljua ei saa missään vaiheessa tyhjentää jos kamiinassa on vielä
+              tuli tai hiillos!
             </strong>
           </li>
           <li>
@@ -107,28 +178,28 @@ const KayttoohjeetPage: NextPage = () => {
             tyhjentämiseksi.
           </li>
           <li>
-            Kun palju on tyhjentynyt vedestä, kiinnitä poistoputken vesitulppa
-            takaisin kujetusta varten.
+            Kun palju on melkein tyhjä ja vielä kostea, voit käydä paljun
+            sisäpinnan läpi rätillä tai pehmeällä harjalla, ja suihkuttaa
+            irtolian pois vedellä.
           </li>
           <li>
-            Älä säilytä täyttö- tai poistoletkua paljun sisällä, jotta paljuun
-            ei tule roskia.
+            Pesuaineena voi käyttää esim. mäntysuopaa tai muuta kevyttä
+            biohajoavaa saippuaa, mutta pesuaineen käyttäminen puhdistuksessa ei
+            ole pakollista.{" "}
+            <strong>
+              Älä käytä paljun puhdistuksessa vahvoja syövyttäviä pesuaineita!
+            </strong>
           </li>
           <li>
-            Nosta kulmatuet ylös vasta sitten kun allas on kokonaan tyhjä ja
-            olet laittanut kannen paikoilleen. Kiinnitä kannen kaikki
-            kiinnikkeet. Kansi menee paikoilleen vain yhdellä tavalla, kannen
-            kahvan ollessa rappusten puolella.
+            Kun palju on tyhjennetty, kiinnitä poistoputken vesitulppa takaisin
+            kujetusta varten.
           </li>
           <li>
-            Irroita kamiinan piippu ja laita se sille tarkoitettuun paikkaan
-            portaiden alle.
+            Laita kaikki paljukärryn mukana tulleet tarvikkeet (täyttö- ja
+            tyhjennysletku, vedenlämpömittari, mela, kulmatukien kahva,
+            tölkkiteline ja tukipalat) takaisin varustekassiin.
           </li>
-          <li>Tyhjennä tuhkalaatikko tuhkista.</li>
-          <li>
-            Tarkista kärryn kiinnitys vetokoukkuun, ja että nokkapyörä sekä
-            tukijalat ovat ylhäällä ja kiristettyinä.
-          </li>
+          <li>Tyhjennä tuhkat kamiinasta.</li>
         </ol>
       </section>
 
@@ -139,34 +210,31 @@ const KayttoohjeetPage: NextPage = () => {
         <ul className="list-disc list-inside space-y-3 text-red-700">
           <li>
             Kamiinaa ei saa sytyttää ennen kuin palju on täytetty vedellä
-            vähintään 5cm ylemmän kamiinan liitosputken yläpuolelle.
+            vähintään 5cm ylemmän kamiinan liitosputken yläpuolelle!
           </li>
           <li>
-            Paljua ei myöskään saa tyhjentää mikäli kamiinassa on tuli tai edes
-            hiillos. Mikäli palju pääsee tyhjenemään äkillisesti, tuli on
-            sammutettava välittömästi kamiinasta.
+            Paljua ei saa tyhjentää jos kamiinassa on tuli tai hiillos. Mikäli
+            palju pääsee tyhjenemään äkillisesti, tuli on sammutettava
+            välittömästi kamiinasta.
           </li>
-          <li>Paljua tai kamiinaa ei saa päästää jäätymään.</li>
+          <li>Vesi ei saa päästä jäätymään paljuun tai kamiinaan.</li>
+          <li>Paljun reunoilla ei saa istua tai seistä.</li>
           <li>
-            Kylpytynnyrin reunoille ei saa astua tai siinä ei saa istua /
-            seistä.
-          </li>
-          <li>
-            Pidä kansi kiinnitettynä paljun päällä kiinnitysremmeillä, jotta
-            tuuli ei vie kantta.
+            Pidä säilytyksen aikana kansi paljun päällä kiinnitysremmeillä
+            kiinnitettynä, jotta tuuli ei vie kantta.
           </li>
           <li>
-            Paljun portaat ja muu ympäristö ovat liukkaita. Portaat ovat etenkin
-            talvella liukkaat, kun vesi jäätyy niihin. Liiku rauhallisesti.
+            Paljun rappuset ja pinnat voivat olla kosteina liukkaat, varsinkin
+            kun vesi jäätyy niihin. Liiku rauhallisesti.
           </li>
           <li>
             Pidäthän huolen, että kukaan ei polta itseään kuumaan kamiinaan tai
             savupiippuun.
           </li>
           <li>
-            Paljun ulkoreunaa ympäröivä metallivanne voi kuumeta polttavaksi
-            kuumassa auringonpaisteessa, joten vältä siihen koskemista
-            tällaisissa olosuhteissa.
+            Paljun ulkoreunaa ympäröivät metallivanteet voivat kuumentua
+            polttavaksi porottavassa auringonpaisteessa, joten vältä niihin
+            koskemista tällaisissa olosuhteissa.
           </li>
           <li>
             Kylpytynnyriin tulee kuumaa vettä ylemmästä kamiinan liitosaukosta,
@@ -178,27 +246,15 @@ const KayttoohjeetPage: NextPage = () => {
           </li>
           <li>
             Valvo aina lasten kylpyhetkiä, varsinkin jos he eivät osaa uida.
-            Hyppiminen paljuun on kiellettyä. Paljuun kiipeäminen ja sieltä pois
-            nouseminen tehdään portaiden kautta.
           </li>
           <li>
-            Paljun sisällä ei saa kuljettaa mitään ja paljun on oltava täysin
-            tyhjä vedestä ennen paljukärryn vetämistä.
+            <strong>Hyppiminen paljuun on kielletty!</strong> Paljuun
+            kiipeäminen ja sieltä pois nouseminen tehdään rappusien kautta.
           </li>
           <li>
-            Pidäthän hyvää huolta kylpytynnyristä jolloin myös seuraavat
-            kylpijät pääsevät nauttimaan hyväkuntoisesta paljusta:
-            <ul className="list-disc list-inside ml-6 mt-2">
-              <li>
-                Ethän hämmennä melalla vettä lasikuitualtaan reunoja / pohjaa
-                pitkin
-              </li>
-              <li>
-                Paljun kansi on hyvä nostaa ilmaan kahden henkilön voimin,
-                jolloin kansi ei naarmuta altaan reunoja
-              </li>
-            </ul>
+            Paljun on oltava täysin tyhjä vedestä ennen paljukärryn kuljetusta.
           </li>
+          <li>Nostakaa paljun kansi aina vähintään kahden henkilön voimin.</li>
         </ul>
       </section>
     </div>

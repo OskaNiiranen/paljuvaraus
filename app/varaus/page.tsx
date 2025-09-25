@@ -25,7 +25,16 @@ const paljuData = {
     { period: "Koko viikko", price: "300€" },
   ],
   // Yhdistetty kaikki kuvat yhteen listaan
-  images: ["/palju1.jpg", "/palju2.jpg", "/palju3.jpg", "/palju4.jpg"],
+  images: [
+    "/palju1.webp",
+    "/palju2.webp",
+    "/palju3.webp",
+    "/palju4.webp",
+    "/palju5.webp",
+    "/palju6.webp",
+    "/palju7.webp",
+    "/kiinnitysremmi.webp",
+  ],
 };
 
 export default function VarausSivu() {

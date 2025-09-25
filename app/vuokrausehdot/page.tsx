@@ -1,246 +1,204 @@
 import { NextPage } from "next";
+import Link from "next/link";
 
 const VuokrausehdotPage: NextPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="background-#ededed text-4xl font-bold mb-6">
-        Yleiset vuokrausehdot
-      </h1>
+      <h1 className="text-4xl font-bold mb-6">Vuokrausehdot</h1>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">1. Vuokra-aika</h2>
+        <h2 className="text-2xl font-semibold mb-4">1. Ehtojen hyväksyminen</h2>
+        <p className="mb-2">
+          Hyväksyessään nämä vuokrausehdot, asiakas sitoutuu lukemaan ehdot ja{" "}
+          <Link
+            href="/kayttoohjeet"
+            className="text-blue-800 hover:text-blue-500 transition-colors"
+          >
+            paljukärryn käyttöohjeet{" "}
+          </Link>
+          kokonaisuudessaan sekä toimimaan niiden mukaisesti. Asiakas on myös
+          vastuussa siitä, että hän ohjeistaa kaikki muut paljukärryä käyttävät
+          henkilöt toimimaan samoin.
+        </p>
+        <p className="mb-2">
+          Jos havaitaan, että asiakas on laiminlyönyt vuokrausehdoissa tai
+          käyttöohjeissa mainittuja toimintatapoja, Palju Paikka ei ole
+          vastuussa paljukärryn käytöstä käyttäjille tai heidän omaisuudelleen
+          aiheutuneista vahingoista.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">
+          2. Vuokra-aika ja toimitus
+        </h2>
         <ul className="list-disc list-inside space-y-2">
           <li>
-            Yhden vuorokauden mittaisissa vuokrissa vuokra-aika sovitaan
-            tapauskohtaisesti. Olemme joustavia tämän suhteen.
+            Vuokra-aika alkaa, kun paljukärry luovutetaan asiakkaalle, ja
+            päättyy, kun se palautetaan vuokranantajalle sovitusti.
           </li>
           <li>
-            Vuokra-aika on aina vähintään 20 tuntia. Jos tuotetta käytetään vain
-            yhdessä tapahtumassa, sen voi yleensä noutaa jo edeltävänä päivänä
-            ja palauttaa tapahtuman jälkeisenä päivänä.
+            Noudot ja palautukset tehdään arkisin klo 9:00–16:00 ja
+            viikonloppuisin sopimuksen mukaan.
           </li>
           <li>
-            Pidemmät vuokraukset ovat sovittavissa joustavasti
-            tapauskohtaisesti.
+            <strong>Toimitus:</strong> Jos asiakas valitsee toimituspalvelun,
+            paljukärry toimitetaan vuokrapäivänä klo 9:00–16:00 välisenä aikana.
+          </li>
+          <li>
+            <strong>Nouto:</strong> Jos asiakas valitsee noutopalvelun,
+            paljukärry noudetaan viimeistä vuokrapäivää seuraavana päivänä klo
+            9:00–16:00. Esimerkiksi, jos varaus on pe–la, nouto on sunnuntaina.
+          </li>
+          <li>
+            <strong>Toimipiste:</strong> Paljukärry noudetaan ja palautetaan
+            osoitteeseen Lintulehdonkuja 57, 04500 Kellokoski, ellei toisin
+            sovita.
           </li>
         </ul>
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">2. Käyttö</h2>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Vuokravälineitä käytetään aina vuokraajan omalla vastuulla.</li>
-          <li>
-            Vuokraaja on velvollinen käsittelemään välineitä ohjeiden mukaisesti
-            huolellisesti ja siten, että ne eivät vahingoitu tai katoa.
-          </li>
-          <li>Välineet tarkistetaan ennen ja jälkeen vuokrauksen.</li>
-          <li>
-            Jälleenvuokraaminen kolmannelle osapuolelle on kielletty ilman
-            vuokranantajan kirjallista hyväksyntää.
-          </li>
-        </ul>
+        <h2 className="text-2xl font-semibold mb-4">3. Maksuehdot</h2>
+        <p className="mb-2">
+          Vuokra maksetaan laskulla, joka toimitetaan asiakkaan sähköpostiin.
+          Maksuohjeet löytyvät laskulta.
+        </p>
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">3. Ilmoitusvelvollisuus</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          4. Varauksen peruuttaminen
+        </h2>
         <p>
-          Vuokraaja on velvollinen ilmoittamaan viipymättä vuokranantajalle, jos
-          välineet katoavat, vahingoittuvat tai niissä ilmenee vikoja.
+          Peruutukset tulee tehdä sähköpostitse osoitteeseen{" "}
+          <a
+            href="mailto:info@paljupaikka.fi"
+            className="text-blue-800 hover:text-blue-500 transition-colors"
+          >
+            info@paljupaikka.fi
+          </a>
+          , mieluiten vastaamalla saamaasi tilausvahvistukseen.
         </p>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">4. Korvausvelvollisuus</h2>
         <p>
-          Vuokraaja on velvollinen korvaamaan vuokravälineiden katoamisesta tai
-          vahingoittumisesta aiheutuneet kustannukset niiden käyvän arvon
-          mukaisesti.
+          Peruutusaika lasketaan kokonaisina vuorokausina vuokrauksen
+          alkamispäivään.
         </p>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">5. Palauttaminen</h2>
-        <ul className="list-disc list-inside space-y-2">
+        <ul className="list-disc list-inside space-y-2 mt-2">
           <li>
-            Jos vuokrattua kohdetta ei palauteta sovittuun aikaan mennessä,
-            myöhästymisestä veloitetaan vuokraajalle ja seuraaville asiakkaille
-            aiheutuneet kohtuulliset kulut, kuitenkin vähintään 50 €.
+            <strong>Yli 14 vrk</strong> ennen vuokrausta: maksu palautetaan
+            kokonaisuudessaan.
           </li>
           <li>
-            Vuokravälineet on palautettava samassa kunnossa kuin ne oli
-            vuokrattaessa.
+            <strong>7–14 vrk</strong> ennen vuokrausta: 75 % vuokrasta
+            palautetaan.
           </li>
           <li>
-            Likaisten välineiden puhdistuksesta veloitetaan 50 €/h, vähintään 50
-            €.
+            <strong>2–6 vrk</strong> ennen vuokrausta: 50 % vuokrasta
+            palautetaan.
+          </li>
+          <li>
+            <strong>Alle 2 vrk</strong> ennen vuokrausta: vuokraa ei palauteta.
+          </li>
+          <li>
+            Toimitus- ja lisäpalvelukulut palautetaan aina kokonaisuudessaan.
           </li>
         </ul>
       </section>
 
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">
-          6. Varauksen peruuttaminen
+          5. Vuokrauksesta kieltäytyminen
         </h2>
-        <p className="mb-2">
-          Peruutus tehdään sähköpostitse osoitteeseen myynti@happybeavers.fi.
+        <p>
+          Vuokranantajalla on oikeus kieltäytyä luovuttamasta paljukärryä, jos
+          havaitaan vakavia turvallisuuspuutteita, kuten:
         </p>
-        <p>Jos varaus peruutetaan:</p>
         <ul className="list-disc list-inside space-y-2 mt-2">
+          <li>Asiakkaan päihtymys.</li>
           <li>
-            <strong>Yli 30 vrk</strong> ennen vuokrausajankohtaa: maksettu
-            vuokra palautetaan kokonaisuudessaan.
+            Vetoajoneuvon liikenneturvallisuutta vaarantava kunto (esim.
+            vialliset valot, renkaat, tai vetokoukku).
           </li>
-          <li>
-            <strong>29–3 vrk</strong> ennen varausta: peruutusmaksu 50 €.
-          </li>
-          <li>
-            <strong>Alle 3 vrk</strong> ennen varausta: peruutusmaksu 150 € tai
-            tuotteen vuokrahinta, jos se on pienempi kuin 150 €.
-          </li>
-        </ul>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">7. Toimitus ja nouto</h2>
-        <ul className="list-disc list-inside space-y-2">
-          <li>
-            Toimitusmaksu sisältää toimituksen ja noudon arkisin klo 08:00–17:00
-            ja lauantaisin klo 09:00–16:00.
-          </li>
-          <li>
-            Sunnuntaisin ja muina aikoina toimitus/nouto sovitaan erikseen.
-          </li>
-        </ul>
-        <h3 className="text-xl font-semibold my-3">
-          Esimerkkejä toimitusaikatauluista:
-        </h3>
-        <ul className="list-disc list-inside space-y-2">
-          <li>
-            <strong>Lauantain tilaus:</strong> Toimitus perjantaina tai
-            lauantaina. Nouto lauantaina klo 16:00 mennessä tai maanantaina.
-          </li>
-          <li>
-            <strong>Sunnuntain tilaus:</strong> Toimitus perjantaina tai
-            lauantaina, nouto maanantaina.
-          </li>
-        </ul>
-      </section>
-
-      <hr className="my-12" />
-
-      <h1 className="text-4xl font-bold mb-6">Erilliset ehdot paljuille</h1>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">1. Asiakkaan omavastuu</h2>
-        <ul className="list-disc list-inside space-y-2">
-          <li>
-            Asiakas on vastuussa paljulle ja perävaunulle aiheutuneista
-            vaurioista paljuyhdistelmän korvausarvoon 5 500 € saakka.
-          </li>
-          <li>
-            Jos kylpytynnyriä ei palauteta muun kuin teknisen vian vuoksi,
-            asiakas sitoutuu maksamaan täyden 5 500 € korvausarvon.
-          </li>
-          <li>
-            Vauriotapauksissa paljun kunnostustyö veloitetaan 70 €/h,
-            omavastuuseen saakka.
-          </li>
-          <li>
-            Paljukärryillä on liikenne- ja kaskovakuutus. Liikennevahingoissa
-            vakuutusyhtiön korvatessa vauriot omavastuu on 500 €.
-          </li>
-          <li>
-            Vuokrauksen aikana hävinneet tai vaurioituneet varusteet veloitetaan
-            erillisen hinnaston mukaan.
-          </li>
-        </ul>
-        <h3 className="text-xl font-semibold my-3">
-          Vaurioiden välttämiseksi huomioi seuraavat ohjeet:
-        </h3>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Perävaunua ei saa kuljettaa siten, että tynnyrissä on vettä.</li>
-          <li>
-            Perävaunu tulee sijoittaa tasaiselle alustalle ennen paljun
-            täyttämistä. Tukijalat asennetaan vasta, kun vettä on täytetty
-            penkkien tasalle.
-          </li>
-          <li>
-            Puukamiinaa ei saa sytyttää, jos vesi ei ole ylemmän putken
-            yläpuolella. Kamiinan sulaminen johtaa 750 € korvausvelvollisuuteen.
-          </li>
-          <li>
-            Kamiinaa käytettäessä on huomioitava kipinävaara. Suositeltava
-            turvaetäisyys rakennuksiin on 8 metriä.
-          </li>
-        </ul>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">
-          2. Vahinkojen ilmoitusvelvollisuus
-        </h2>
-        <ul className="list-disc list-inside space-y-2">
-          <li>
-            Vuokrauksen alussa palju tarkastetaan yhdessä asiakkaan kanssa, ja
-            mahdolliset viat kirjataan ylös.
-          </li>
-          <li>
-            Vuokrauksen aikana syntyneet viat on ilmoitettava välittömästi
-            vuokranantajalle.
-          </li>
-          <li>
-            Jos vikoja havaitaan vasta palautuksen jälkeen, ne katsotaan
-            asiakkaan aiheuttamiksi, ellei asiakas ole ilmoittanut niistä
-            aiemmin.
-          </li>
-        </ul>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">
-          3. Varauksen peruuttaminen
-        </h2>
-        <p className="mb-2">
-          Peruutus tehdään ottammalla yhteyttä joko puhelimitse tai
-          sähköpostitse.
-        </p>
-        <p>Jos varaus peruutetaan:</p>
-        <ul className="list-disc list-inside space-y-2 mt-2">
-          <li>
-            <strong>Yli 30 vrk</strong> ennen vuokrausajankohtaa: maksettu
-            vuokra palautetaan kokonaisuudessaan.
-          </li>
-          <li>
-            <strong>29–3 vrk</strong> ennen varausta: peruutusmaksu 50 €.
-          </li>
-          <li>
-            <strong>Alle 3 vrk</strong> ennen varausta: peruutusmaksu 150 € tai
-            tuotteen vuokrahinta, jos se on pienempi kuin 150 €.
-          </li>
-        </ul>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">4. Paljun puhdistaminen</h2>
-        <p className="mb-2">
-          Palju tulee puhdistaa ennen palautusta, ellei muuta ole sovittu.
-        </p>
-        <p>Puhdistus sisältää:</p>
-        <ul className="list-disc list-inside space-y-2 mt-2">
-          <li>Tynnyrin sisäpintojen pyyhkimisen ja huuhtelun.</li>
-          <li>Kamiinan tyhjentämisen.</li>
-          <li>Paljun ulkoisen siistimisen.</li>
         </ul>
         <p className="mt-2">
-          Mikäli palju palautetaan likaisena, siivous veloitetaan 50 €/h,
-          vähintään 50 €.
+          Jos luovutus estyy asiakkaasta johtuvasta syystä, vuokramaksua ei
+          palauteta. Jos luovutus estyy vuokranantajasta johtuvasta syystä,
+          vuokramaksu ja muut maksut hyvitetään.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">
+          6. Asiakkaan velvollisuudet ja vastuu
+        </h2>
+        <ul className="list-disc list-inside space-y-2">
+          <li>
+            Asiakkaan on hoidettava paljukärryä ja sen varusteita huolellisesti.
+          </li>
+          <li>
+            Asiakas vakuuttaa, että hänellä on vaadittava ajokortti ja
+            lainsäädännön mukainen vetoajoneuvo paljukärryn vetämiseen (omapaino
+            700 kg, jarrullinen).
+          </li>
+          <li>
+            Paljukärryä ei saa viedä Suomen rajojen ulkopuolelle ilman
+            kirjallista lupaa.
+          </li>
+          <li>
+            Paljukärryn vuokraaminen kolmannelle osapuolelle on kielletty.
+          </li>
+          <li>
+            Asiakas on velvollinen ilmoittamaan vuokranantajalle välittömästi
+            kaikista vioista, vahingoista tai puutteista.
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">
+          7. Viat ja korvausvelvollisuus
+        </h2>
+        <ul className="list-disc list-inside space-y-2">
+          <li>
+            Paljukärry tarkastetaan yhdessä asiakkaan kanssa vuokrauksen alussa
+            ja lopussa. Mahdolliset viat kirjataan ylös.
+          </li>
+          <li>
+            Asiakas on korvausvelvollinen kaikista vahingoista, jotka johtuvat
+            käyttöohjeiden tai vuokrausehtojen laiminlyönnistä.
+          </li>
+          <li>
+            Palautuksen jälkeen havaitut viat katsotaan asiakkaan aiheuttamiksi,
+            ellei niistä ole ilmoitettu aiemmin.
+          </li>
+          <li>
+            Paljukärryllä on liikenne- ja kaskovakuutus. Liikennevahingon
+            sattuessa asiakkaan omavastuu on 500 €.
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">
+          8. Paljun puhdistus ja palautus
+        </h2>
+        <p className="mb-2">
+          Palju on palautettava puhdistettuna. Puhdistukseen kuuluu:
+        </p>
+        <ul className="list-disc list-inside space-y-2 mt-2">
+          <li>Paljun sisäpintojen pesu ja huuhtelu.</li>
+          <li>Kamiinan tuhkan tyhjennys.</li>
+          <li>Yleinen siistiminen.</li>
+        </ul>
+        <p className="mt-2">
+          Laiminlyödystä siivouksesta veloitetaan vähintään 50 €.
         </p>
       </section>
 
       <p className="text-sm text-gray-600 mt-12">
-        Nämä ehdot ovat voimassa toistaiseksi ja niitä voidaan päivittää
-        tarvittaessa.
+        Nämä ehdot ovat voimassa toistaiseksi. Palju Paikka pidättää oikeuden
+        muutoksiin.
       </p>
     </div>
   );

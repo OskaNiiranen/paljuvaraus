@@ -26,6 +26,15 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/tietosuojaseloste"
+                  className="hover:text-white transition-colors"
+                >
+                  Tietosuojaseloste
+                </Link>
+              </li>
+
+              <li>
                 <Link href="/" className="hover:text-white transition-colors">
                   Etusivulle
                 </Link>
@@ -54,7 +63,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <p>Lintulehdonkuja 57, 04500 Tuusula</p>
+                <a href="https://www.google.com/maps/place/Lintulehdonkuja+57,+04500+Rutalahti">
+                  Lintulehdonkuja 57, 04500 Kellokoski
+                </a>
               </li>
             </ul>
           </div>
