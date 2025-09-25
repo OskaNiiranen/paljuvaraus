@@ -1,4 +1,4 @@
-'use client'; // Tarvitaan, koska käytämme useState-hookia
+"use client"; // Tarvitaan, koska käytämme useState-hookia
 
 import { useState } from "react";
 import Image from "next/image";
@@ -11,7 +11,7 @@ const paljuData = {
   description:
     "Paljukärrymme on rekisteröity tieliikennekäyttöön, joten sitä voi kuljettaa henkilöautokortilla auton perässä. Turvallisuuden takaamiseksi käryssä on tukevat kaiteet ja rappuset, jotka tekevät liikkumisesta ja paljuun nousemisesta turvallista. Lisäksi kärryn kahdeksan tukijalkaa varmistavat, että se pysyy vakaasti ja tasaisesti paikoillaan epätasaisellakin alustalla. Palju lämpenee tehokkaalla 35 kW:n puulämmitteisellä kamiinalla, jossa on vesivaippa. Tämä lämmittää paljun veden ja estää kamiinan ulkopinnan ylikuumenemisen. Paljuun mahtuu 1540 litraa vettä, ja se lämpenee noin kahdessa tunnissa 37-asteiseksi, kun alkulämpötila on 10 astetta, ja kantta pidetään kiinni lämmityksen ajan. Lämmitykseen kuluu noin 40 litraa koivuklapeja, jotka voit ostaa meiltä kätevästi varauksen yhteydessä.",
   included: [
-    "Palikat kärryn jalkojen alle tasaiseen asennukseen",
+    "Tukipalat kärryn jalkojen alle tasaiseen asennukseen",
     "Letkut paljun täyttöä ja tyhjennystä varten",
     "Kelluva vedenlämpömittari",
     "Mela veden sekoittamista varten",
