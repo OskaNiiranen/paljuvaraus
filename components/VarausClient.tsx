@@ -119,10 +119,8 @@ export default function VarausClient() {
                       key={index}
                       className="flex justify-between border-b py-2"
                     >
-                      <span className="text-gray-600">{item.period}</span>
-                      <span className="font-semibold text-gray-900">
-                        {item.price}
-                      </span>
+                      <span>{item.period}</span>
+                      <span className="font-semibold">{item.price}</span>
                     </div>
                   ))}
                 </div>
