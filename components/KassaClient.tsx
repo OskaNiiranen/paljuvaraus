@@ -189,9 +189,11 @@ function KassaContent() {
     <main className="container mx-auto px-4 py-12">
       <div className="text-center mb-10">
         <h1 className="text-4xl font-extrabold text-gray-900">Tee varaus</h1>
-        <p className="mt-2 text-lg text-gray-600">
-          Olet melkein valmis! Täytä vain tietosi alle ja lue vuokrausehdot.
+        <p className="mt-2">
+          Olet melkein valmis! Täytä vain tietosi alle ja lue vuokrausehdot ja
+          paljukärryn käyttöohjeet.
         </p>
+        <p>Kaikki * merkityt kohdat ovat pakollisia täyttää.</p>
       </div>
 
       <form onSubmit={handleSubmit}>
