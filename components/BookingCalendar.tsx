@@ -158,7 +158,7 @@ export default function BookingCalendar() {
       </div>
       <div className="text-center mt-6">
         <p className="text-2xl font-bold mb-4">
-          Hinta yhteensä: <span className="text-blue-600">{totalPrice}€</span>
+          Hinta yhteensä: <span className="text-blue-600">{totalPrice} €</span>
         </p>
         <Link
           href={getKassaLink()}

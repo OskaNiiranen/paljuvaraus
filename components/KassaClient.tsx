@@ -91,10 +91,10 @@ function KassaContent() {
           );
         } else if (result.distance > 30) {
           setDeliveryCost(80);
-          setDeliveryInfo("Toimituksen hinta: 80€");
+          setDeliveryInfo("Toimituksen hinta: 80 €");
         } else {
           setDeliveryCost(40);
-          setDeliveryInfo("Toimituksen hinta: 40€");
+          setDeliveryInfo("Toimituksen hinta: 40 €");
         }
         setIsCheckingDistance(false);
       });
@@ -378,10 +378,10 @@ function KassaContent() {
                       htmlFor="pickup"
                       className="block text-sm font-bold text-gray-900"
                     >
-                      Noudan itse toimipisteestä (0€)
+                      Noudan itse toimipisteestä (0 €)
                     </label>
                     <p className="text-sm text-gray-500">
-                      Lintulehdonkuja 57, 04500 Tuusula
+                      Lintulehdonkuja 57, 04500 Kellokoski
                     </p>
                   </div>
                 </div>
@@ -402,7 +402,7 @@ function KassaContent() {
                       htmlFor="delivery"
                       className="block text-sm font-bold text-gray-900"
                     >
-                      Tilaan toimituksen (40-80€)
+                      Tilaan toimituksen (40-80 €)
                     </label>
                     <p className="text-sm text-gray-500">
                       Toimitus max. 50 km toimipisteestä.
@@ -483,7 +483,7 @@ function KassaContent() {
                 <div className="flex justify-between items-center">
                   <div>
                     <h4 className="font-semibold text-gray-800">
-                      Polttopuut (40L säkki) 10€ per säkki
+                      Polttopuut (40 L säkki) 10 € per säkki
                     </h4>
                     <p className="text-sm text-gray-500">
                       Yksi säkki riittää yleensä yhteen lämmityskertaan, mutta

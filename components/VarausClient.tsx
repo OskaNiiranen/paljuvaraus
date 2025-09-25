@@ -18,11 +18,11 @@ const paljuData = {
     "Paljun kylkeen asetettava juomateline",
   ],
   pricing: [
-    { period: "Vuorokausi (ma, ti, ke, to)", price: "70€" },
-    { period: "Kaikki arkipäivät (ma-to)", price: "230€" },
-    { period: "Viikonloppu vuorokausi (pe, la, su)", price: "100€" },
-    { period: "Koko viikonloppu (pe-su)", price: "250€" },
-    { period: "Koko viikko (7 vuorokautta)", price: "300€" },
+    { period: "Vuorokausi (ma, ti, ke, to)", price: "70 €" },
+    { period: "Kaikki arkipäivät (ma-to)", price: "230 €" },
+    { period: "Viikonloppu vuorokausi (pe, la, su)", price: "100 €" },
+    { period: "Koko viikonloppu (pe-su)", price: "250 €" },
+    { period: "Koko viikko (7 vuorokautta)", price: "300 €" },
   ],
   images: [
     "/palju1.webp",

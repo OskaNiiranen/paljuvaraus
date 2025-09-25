@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Vuokrausehdot',
+  title: "Vuokrausehdot",
 };
 
 import { NextPage } from "next";
@@ -194,11 +194,11 @@ const VuokrausehdotPage: NextPage = () => {
         </p>
         <ul className="list-disc list-inside space-y-2 mt-2">
           <li>Paljun sisäpintojen pesu ja huuhtelu.</li>
-          <li>Kamiinan tuhkan tyhjennys.</li>
+          <li>Kamiinan tyhjennys.</li>
           <li>Yleinen siistiminen.</li>
         </ul>
         <p className="mt-2">
-          Laiminlyödystä siivouksesta veloitetaan vähintään 50 €.
+          Jos palju palautetaan likaisena, veloitamme siivouksesta 50 €.
         </p>
       </section>
 
