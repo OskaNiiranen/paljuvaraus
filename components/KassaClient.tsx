@@ -334,6 +334,29 @@ function KassaContent() {
               </div>
             </div>
 
+            {/* Lisätiedot */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Lisätiedot</h2>
+              <div className="grid grid-cols-1 gap-6">
+                <div>
+                  <label
+                    htmlFor="notes"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Lisätietoja varaukseen liittyen (vapaaehtoinen)
+                  </label>
+                  <textarea
+                    name="notes"
+                    id="notes"
+                    value={formData.notes}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* Toimitusvalinnat */}
             <div>
               <h2 className="text-2xl font-bold mb-6">Toimitustapa</h2>

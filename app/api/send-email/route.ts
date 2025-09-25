@@ -22,6 +22,7 @@ export async function POST(request: Request) {
       );
     }
 
+    const bookingId = `PALJU-${Date.now().toString(36).toUpperCase()}`;
     const fromAddress = "Palju Paikka <info@paljupaikka.fi>";
 
     const formatDate = (dateString: string | null) => {
@@ -39,12 +40,13 @@ export async function POST(request: Request) {
       from: fromAddress,
       to: [customer.email],
       bcc: OMA_SAHKOPOSTI,
-      subject: "Varauspyyntösi on vastaanotettu!",
+      subject: `Varauspyyntösi on vastaanotettu! (Varausnumero: ${bookingId})`,
       html: `
         <h1>Kiitos varauspyynnöstäsi, ${customer.firstName}!</h1>
         <p>Varauspyyntösi tuli perille onnistuneesti. Käsittelemme sen mahdollisimman pian ja vahvistamme varauksen lähettämällä sinulle laskun ja maksuohjeet sähköpostiisi.</p>
         <h2>Varauksen tiedot:</h2>
         <ul>
+          <li><strong>Varausnumero:</strong> ${bookingId}</li>
           <li><strong>Tuote:</strong> ${booking.productName}</li>
           <li><strong>Ajanjakso:</strong> ${formatDate(
             booking.startDate
@@ -94,12 +96,16 @@ export async function POST(request: Request) {
     try {
       const bookingData = {
         ...booking,
+        bookingId,
+        startDateFormatted: formatDate(booking.startDate),
+        endDateFormatted: formatDate(booking.endDate),
         customer,
         delivery,
         extras,
         total,
         createdAt: new Date(),
-        status: "pending",
+        status: "vahvistamatta",
+        invoiceStatus: "maksamatta",
       };
 
       const docRef = await addDoc(collection(db, "bookings"), bookingData);
