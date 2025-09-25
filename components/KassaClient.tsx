@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect, Suspense } from "react";
@@ -59,7 +59,8 @@ function KassaContent() {
     zipCode: "",
     city: "",
     notes: "",
-    termsAccepted: false,
+    vuokrausehdotAccepted: false,
+    kayttoohjeetAccepted: false,
   });
 
   const [deliveryMethod, setDeliveryMethod] = useState<"pickup" | "delivery">(
@@ -116,8 +117,10 @@ function KassaContent() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formData.termsAccepted) {
-      setAlertMessage("Hyväksy vuokrausehdot jatkaaksesi.");
+    if (!formData.vuokrausehdotAccepted || !formData.kayttoohjeetAccepted) {
+      setAlertMessage(
+        "Hyväksy sekä vuokrausehdot että käyttöohjeet jatkaaksesi."
+      );
       return;
     }
     setIsSubmitting(true);
@@ -284,7 +287,7 @@ function KassaContent() {
                       htmlFor="pickup"
                       className="block text-sm font-bold text-gray-900"
                     >
-                      Noudan itse (0€)
+                      Noudan itse toimipisteestä (0€)
                     </label>
                     <p className="text-sm text-gray-500">
                       Lintulehdonkuja 57, 04500 Tuusula
@@ -308,10 +311,10 @@ function KassaContent() {
                       htmlFor="delivery"
                       className="block text-sm font-bold text-gray-900"
                     >
-                      Tilaan toimituksen (alk. 40€)
+                      Tilaan toimituksen (40-80€)
                     </label>
                     <p className="text-sm text-gray-500">
-                      Toimitus max. 50 km noutopisteestä.
+                      Toimitus max. 50 km toimipisteestä.
                     </p>
                   </div>
                 </div>
@@ -389,10 +392,12 @@ function KassaContent() {
                 <div className="flex justify-between items-center">
                   <div>
                     <h4 className="font-semibold text-gray-800">
-                      Koivuklapit (40L säkki) 10€ per säkki
+                      Polttopuut (40L säkki) 10€ per säkki
                     </h4>
                     <p className="text-sm text-gray-500">
-                      Yksi säkki riittää yhteen lämmityskertaan (n. 37°C).
+                      Yksi säkki riittää yleensä yhteen lämmityskertaan, mutta
+                      suosittelemme ottamaan kaksi säkkiä varmuuden vuoksi,
+                      varsinkin kylmemmällä ilmalla.
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
@@ -440,7 +445,7 @@ function KassaContent() {
                 </div>
                 <hr className="my-2" />
                 <div className="flex justify-between">
-                  <span>Paljun vuokra:</span>
+                  <span>Paljukärryn vuokra:</span>
                   <span>{bookingDetails.basePrice}€</span>
                 </div>
                 <div className="flex justify-between">
@@ -458,27 +463,53 @@ function KassaContent() {
                   <span>{totalPrice}€</span>
                 </div>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 space-y-3">
                 <div className="flex items-start">
                   <input
-                    id="termsAccepted"
-                    name="termsAccepted"
+                    id="vuokrausehdotAccepted"
+                    name="vuokrausehdotAccepted"
                     type="checkbox"
-                    checked={formData.termsAccepted}
+                    checked={formData.vuokrausehdotAccepted}
                     onChange={handleInputChange}
                     required
                     className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1"
                   />
                   <label
-                    htmlFor="termsAccepted"
+                    htmlFor="vuokrausehdotAccepted"
                     className="ml-2 block text-sm text-gray-900"
                   >
                     Olen lukenut ja hyväksyn{" "}
                     <Link
-                      href="/ehdot"
+                      href="/vuokrausehdot"
+                      target="_blank"
                       className="font-medium text-blue-600 hover:underline"
                     >
                       vuokrausehdot
+                    </Link>
+                    .*
+                  </label>
+                </div>
+                <div className="flex items-start">
+                  <input
+                    id="kayttoohjeetAccepted"
+                    name="kayttoohjeetAccepted"
+                    type="checkbox"
+                    checked={formData.kayttoohjeetAccepted}
+                    onChange={handleInputChange}
+                    required
+                    className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1"
+                  />
+                  <label
+                    htmlFor="kayttoohjeetAccepted"
+                    className="ml-2 block text-sm text-gray-900"
+                  >
+                    Olen lukenut{" "}
+                    <Link
+                      href="/kayttoohjeet"
+                      target="_blank"
+                      className="font-medium text-blue-600 hover:underline"
+                    >
+                      käyttöohjeet
                     </Link>
                     .*
                   </label>
@@ -488,7 +519,8 @@ function KassaContent() {
                 type="submit"
                 className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg rounded-lg py-3 transition shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
                 disabled={
-                  !formData.termsAccepted ||
+                  !formData.vuokrausehdotAccepted ||
+                  !formData.kayttoohjeetAccepted ||
                   (deliveryMethod === "delivery" &&
                     deliveryCost === 0 &&
                     formData.zipCode.length === 5) ||
