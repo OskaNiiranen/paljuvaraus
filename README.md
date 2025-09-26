@@ -1,13 +1,13 @@
 # Palju Paikka Web-Applikaatio
 
-Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakkaat voivat selata saatavilla olevia paljukärryjä, tarkistaa niiden saatavuuden ja tehdä varauksia. Ylläpitäjälle on (tai tulee olemaan) oma näkymä varausten ja kaluston hallintaan.
+Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakkaat voivat selata saatavilla olevia paljukärryjä, tarkistaa niiden saatavuuden ja tehdä varauksia. Ylläpitäjälle on oma näkymä varausten ja kaluston hallintaan.
 
 ## Tavoitteet
 
 - Tarjota helppokäyttöinen käyttöliittymä asiakkaille paljujen varaamiseen.
-- Näyttää selkeästi paljujen tiedot, kuvat ja saatavuuskalenteri.
+- Näyttää selkeästi paljukärryn tiedot, kuvat ja saatavuuskalenteri.
 - Mahdollistaa yhteydenotto ja varauspyyntöjen lähettäminen.
-- (Tulevaisuudessa) Tarjota ylläpitäjälle työkaluja varausten ja paljukaluston hallintaan.
+- Tarjota ylläpitäjälle työkaluja varausten ja paljukaluston hallintaan.
 - (Tulevaisuudessa) Mahdollistaa online-maksut.
 
 ## Teknologiat
@@ -16,10 +16,10 @@ Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakk
 - **Ohjelmointikieli:** TypeScript
 - **Tyylit:** Tailwind CSS
 - **Versionhallinta:** Git & GitHub
-- **Backend (MVP):**
+- **Backend:**
   - Next.js API Routes
+  - **Tietokanta:** Firebase Firestore
   - **Sähköpostit:** Resend
-- **Backend (Tulevaisuudessa):** Firebase / Supabase
 - **Kehitysympäristö:** VS Code
 - **Hosting:** Vercel
 
@@ -28,8 +28,8 @@ Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakk
 1.  **Kloonaa repositorio:**
 
     ```bash
-    git clone [https://github.com/OskaNiiranen/PaljuVaraus](https://github.com/OskaNiiranen/PaljuVaraus)
-    cd paljupaikka
+    git clone https://github.com/OskaNiiranen/PaljuVaraus
+    cd paljuvaraus
     ```
 
 2.  **Asenna riippuvuudet:**
@@ -40,10 +40,19 @@ Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakk
 
 3.  **Määritä ympäristömuuttujat (Environment Variables):**
     - Luo projektin juureen `.env.local` -tiedosto.
-    - Lisää Resend API-avaimesi:
+    - Lisää tarvittavat avaimet (Resend, Firebase):
+
       ```
       # .env.local
       RESEND_API_KEY=re_YOUR_API_KEY_HERE
+
+      # Firebase config
+      NEXT_PUBLIC_FIREBASE_API_KEY=AIza...
+      NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
+      NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
+      NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
+      NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
+      NEXT_PUBLIC_FIREBASE_APP_ID=...
       ```
 
 4.  **Käynnistä kehityspalvelin:**
@@ -56,13 +65,13 @@ Tämä on web-applikaatio paljukärryjen vuokraukseen. Sovelluksen avulla asiakk
 
 ## Kehityksen Edistyminen ja Tehtävälista
 
-**PÄIVITETTY: 04.08.2025**
+**PÄIVITETTY: 26.09.2025**
 
 **NYT TYÖN ALLA / SEURAAVAKSI:**
 
-- **Vaihe 5: Jatkokehitys - Tietokantaintegraatio.**
-  - Suunnitellaan ja toteutetaan Firebase Firestore -integraatio.
-  - Tavoitteena on tallentaa tehdyt varaukset tietokantaan ja näyttää varatut ajat kalenterissa reaaliaikaisesti.
+- **Vaihe 5: Ylläpitäjänäkymä (Admin Panel)**
+  - Kehitetään näkymää varausten hallintaan (listaus, poisto, muokkaus).
+  - Tavoitteena on antaa yrittäjälle täydet työkalut varausten hallintaan ilman tarvetta käyttää Firebase-konsolia.
 
 ---
 
@@ -72,7 +81,7 @@ _Tavoite: Työkalut ja perussuunnitelma valmiina kehityksen aloittamiseen._
 
 - [x] **Projektinhallinta:** Tämä README toimii seurantatyökaluna.
 - [x] **Visuaalinen hahmotelma:** Sivujen rakenne ja "varausputki" suunniteltu.
-- [x] **Teknologiavalinnat:** Vahvistettu (Next.js, TypeScript, Tailwind CSS, Resend, Vercel).
+- [x] **Teknologiavalinnat:** Vahvistettu (Next.js, TypeScript, Tailwind CSS, Resend, Firebase, Vercel).
 - [x] **Kehitysympäristö:** VS Code asennettu, GitHub-repositorio luotu, Next.js-projekti alustettu.
 
 ---
@@ -94,40 +103,45 @@ _Tavoite: Näkyvä sivuston runko, jossa on perusinformaatio ja navigointi._
 _Tavoite: Asiakas voi nähdä saatavuuden, laskea hinnan ja lähettää varauspyynnön._
 
 - [x] **Kalenterikomponentti:** Integroitu `react-day-picker`.
-  - _Miten tehty:_ Luotu `BookingCalendar.tsx`-komponentti. Käytössä `date-fns` päivämäärien käsittelyyn ja lokalisointiin.
 - [x] **Hinnanlaskenta:** Hinta päivittyy dynaamisesti kalenterivalintojen mukaan.
-  - _Miten tehty:_ `useEffect`-hook ja `calculatePrice`-funktio, joka huomioi arki-, viikonloppu-, koko viikonloppu- ja viikkohinnat.
 - [x] **Kassasivu:** Toimiva lomake kerää asiakkaan tiedot.
-  - _Miten tehty:_ `useState`-hookilla hallitaan lomakkeen tilaa.
 - [x] **Datan välitys:** Valitut päivät ja hinta välitetään kassasivulle URL-parametreina.
-  - _Miten tehty:_ Käytetty `useSearchParams`-hookia datan lukemiseen.
-- [x] **Lisäpalvelut:** Toimitus- ja polttopuuvalinnat lisätty kassalle, ja ne päivittävät hintaa.
-- [x] **Varauspyynnön lähetys:** Varauspyyntö lähetetään onnistuneesti sähköpostitse.
-  - _Miten tehty:_ Toteutettu Next.js API-reitillä (`/api/send-email`) ja Resend-palvelulla. Asiakas ja yrittäjä saavat vahvistusviestin.
+- [x] **Lisäpalvelut:** Toimitus- ja polttopuuvalinnat lisätty kassalle.
+- [x] **Varauspyynnön lähetys:** Varauspyyntö lähetetään onnistuneesti sähköpostitse (Resend).
 - [x] **Ohjaus kiitossivulle:** Onnistuneen lähetyksen jälkeen asiakas ohjataan `/kiitos`-sivulle.
-  - _Miten tehty:_ Käytetty Next.js:n `useRouter`-hookia.
 
 ---
 
-### Vaihe 4: Viimeistely, Testaus ja Käyttöönoton Valmistelu
+### Vaihe 4: Tietokantaintegraatio ja Kalenterin Synkronointi
 
-_Tavoite: Hiottu, testattu ja julkaisuvalmis perusversio._
+_Tavoite: Varaukset tallennetaan tietokantaan ja kalenteri näyttää varatut ajat reaaliaikaisesti._
+
+- [x] **Tietokantaintegraatio:** Yhteys Firebase Firestoreen on muodostettu (`lib/firebase.ts`).
+- [x] **Varausten haku:** Luotu API-reitti (`/api/get-bookings`), joka hakee kaikki varaukset Firestoresta.
+- [x] **Kalenterin synkronointi:** Varauskalenteri (`BookingCalendar.tsx`) hakee varatut päivät ja estää niiden valinnan.
+- [ ] **Varausten tallennus:** Logiikka varauksen tallentamiseksi tietokantaan `send-email`-reitin yhteydessä.
+
+---
+
+### Vaihe 5: Ylläpitäjänäkymä (Admin Panel) - (Käynnissä)
+
+_Tavoite: Tarjota yrittäjälle näkymä varausten hallintaan._
+
+- [x] **Perusrakenne:** Luotu sivut `/hallinta` ja `/hallinta/dashboard`.
+- [ ] **Varausten listaus:** Näytetään kaikki tehdyt varaukset hallintapaneelissa.
+- [ ] **Varausten hallinta:** Lisätään toiminnallisuudet varausten poistamiseen ja muokkaamiseen.
+- [ ] **Käyttöoikeuksien hallinta:** Varmistetaan, että vain ylläpitäjä pääsee käsiksi näkymään.
+
+---
+
+### Vaihe 6: Viimeistely ja Jatkokehitys
+
+_Tavoite: Hiottu, testattu ja julkaisuvalmis perusversio sekä tulevaisuuden suunnitelmat._
 
 - [ ] **Kattava tyylittely ja responsiivisuus.**
 - [ ] **Käytettävyystestaus ja palaute.**
-- [ ] **Selainyhteensopivuus ja optimointi.**
-- [ ] **Tietosuoja ja käyttöehdot:** Luodaan `/ehdot`-sivu.
+- [ ] **Tietosuoja ja käyttöehdot:** Luodaan sivut `/tietosuojaseloste` ja `/vuokrausehdot`.
 - [ ] **Tuotantojulkaisu:** Yhdistetään oma domain (`.fi`) Verceliin.
-
----
-
-### Vaihe 5: Jatkokehitys (MVP 2 ja eteenpäin)
-
-_Tavoite: Parannellaan ja lisätään uusia ominaisuuksia._
-
-- [ ] **Varauskalenteri v2 - Tietokantaintegraatio.**
-  - _Suunnitelma/Ideat:_ Otetaan käyttöön Firebase Firestore. Tallennetaan varaukset sinne ja haetaan varatut päivät kalenteriin, jotta tuplavarauksia ei voi tehdä.
-- [ ] **Ylläpitäjänäkymä (Admin Panel).**
 - [ ] **Online-maksut.**
 - [ ] **Käyttäjätilit (Asiakkaat).**
 
