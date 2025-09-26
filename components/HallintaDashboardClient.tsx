@@ -13,6 +13,10 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
+import { fi } from "date-fns/locale";
+
 interface Booking extends DocumentData {
   id: string;
 }
@@ -41,6 +45,35 @@ export default function HallintaDashboardClient() {
   const [user, setUser] = useState<User | null>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [bookingDates, setBookingDates] = useState<Date[]>([]);
+  const [adminBlockedDates, setAdminBlockedDates] = useState<Date[]>([]);
+  const [selectedBlockDates, setSelectedBlockDates] = useState<Date[] | undefined>(
+    []
+  );
+  const [isBlocking, setIsBlocking] = useState(false);
+
+  const fetchDisabledDates = async () => {
+    try {
+      const response = await fetch("/api/get-bookings");
+      const data = await response.json();
+
+      // bookingDates are full ISO strings, new Date() is correct
+      const bDates = data.bookingDates.map(
+        (dateStr: string) => new Date(dateStr)
+      );
+      // blockedDates are YYYY-MM-DD strings, parse as local date
+      const aDates = data.blockedDates.map((dateStr: string) => {
+        const [year, month, day] = dateStr.split("-").map(Number);
+        return new Date(year, month - 1, day);
+      });
+
+      setBookingDates(bDates);
+      setAdminBlockedDates(aDates);
+      setSelectedBlockDates(aDates);
+    } catch (error) {
+      console.error("Failed to fetch disabled dates:", error);
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -75,6 +108,7 @@ export default function HallintaDashboardClient() {
       };
 
       fetchBookings();
+      fetchDisabledDates();
     }
   }, [user]);
 
@@ -84,6 +118,57 @@ export default function HallintaDashboardClient() {
       window.location.href = "/hallinta";
     } catch (error) {
       console.error("Uloskirjautumisvirhe:", error);
+    }
+  };
+
+  const handleBlockDates = async () => {
+    const datesToToggle = [
+      ...adminBlockedDates.filter(
+        (d) =>
+          !selectedBlockDates?.some((sd) => sd.getTime() === d.getTime())
+      ),
+      ...(selectedBlockDates?.filter(
+        (sd) => !adminBlockedDates.some((d) => d.getTime() === sd.getTime())
+      ) || []),
+    ];
+
+    const toYYYYMMDD = (date: Date) => {
+      const d = new Date(date);
+      // Adjust for timezone offset to get the correct date parts
+      d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+      return d.toISOString().split("T")[0];
+    };
+
+    const datesToToggleStrings = datesToToggle.map(toYYYYMMDD);
+
+    if (datesToToggleStrings.length === 0) {
+      alert("Ei muutoksia tallennettavaksi.");
+      return;
+    }
+
+    setIsBlocking(true);
+    try {
+      const response = await fetch("/api/block-dates", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ dates: datesToToggleStrings }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update blocked dates");
+      }
+
+      // Optimistic update: set the new ground truth for admin-blocked dates
+      setAdminBlockedDates(selectedBlockDates || []);
+      alert("Kalenteri päivitetty onnistuneesti!");
+
+    } catch (error) {
+      console.error("Error blocking dates:", error);
+      alert("Päivien estäminen epäonnistui. Yritä ladata sivu uudelleen.");
+    } finally {
+      setIsBlocking(false);
     }
   };
 
@@ -106,6 +191,23 @@ export default function HallintaDashboardClient() {
     } catch (error) {
       console.error("Tilan päivitys epäonnistui:", error);
     }
+  };
+
+  const modifiers = {
+    booking: bookingDates,
+    adminBlocked: selectedBlockDates, // Use selected state for instant feedback
+  };
+
+  const modifierStyles = {
+    booking: {
+      backgroundColor: "#FEE2E2", // Red-100
+      color: "#991B1B", // Red-800
+      fontWeight: "bold",
+    },
+    adminBlocked: {
+      backgroundColor: "#F3F4F6", // Gray-100
+      color: "#374151", // Gray-700
+    },
   };
 
   if (isLoading) {
@@ -257,6 +359,45 @@ export default function HallintaDashboardClient() {
               )}
             </tbody>
           </table>
+        </div>
+
+        <div className="mt-8 rounded-lg bg-white p-6 shadow">
+          <h2 className="mb-4 text-xl font-bold text-gray-900">
+            Hallinnoi kalenteria
+          </h2>
+          <p className="mb-4 text-gray-600">
+            Asiakkaiden tekemät varaukset näkyvät punaisella, eikä niitä voi
+            muokata tästä. Hallinnoijan estämät päivät (esim. huolto) näkyvät
+            harmaalla. Voit lisätä tai poistaa harmaita estopäiviä klikkaamalla
+            niitä.
+          </p>
+          <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
+            <div className="flex-shrink-0">
+              <DayPicker
+                mode="multiple"
+                min={0}
+                selected={selectedBlockDates}
+                onSelect={setSelectedBlockDates}
+                disabled={[{ before: new Date() }, ...bookingDates]}
+                modifiers={modifiers}
+                modifiersStyles={modifierStyles}
+                locale={fi}
+                styles={{
+                  caption: { color: "#1E40AF" },
+                  head: { color: "#1E40AF" },
+                }}
+              />
+            </div>
+            <div className="w-full flex-grow md:w-auto">
+              <button
+                onClick={handleBlockDates}
+                disabled={isBlocking}
+                className="w-full rounded-md bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+              >
+                {isBlocking ? "Tallennetaan..." : "Tallenna muutokset"}
+              </button>
+            </div>
+          </div>
         </div>
       </main>
     </div>
